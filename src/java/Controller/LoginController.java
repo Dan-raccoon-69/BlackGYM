@@ -36,6 +36,11 @@ public class LoginController extends HttpServlet {
         
         System.out.println("User: "+ user);
         System.out.println("Password: "+ password);
+        
+        RequestDispatcher rd;
+        // enviamos respuesta, se renderiza a la vista "index.jsp"
+        rd = request.getRequestDispatcher("/homePage.jsp");
+        rd.forward(request, response);
     }
 
 }
