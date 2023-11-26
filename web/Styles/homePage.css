@@ -1,0 +1,121 @@
+*{
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #111; /* Fondo oscuro */
+    color: #fff; /* Texto blanco */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    background-color: #333; /* Fondo oscuro del navbar */
+    position: relative; /* Agregado para establecer un contexto de apilamiento */
+    z-index: 2; /* Ajustado para establecer un valor de z-index mayor que el del aside */
+}
+
+.navbar-left {
+    flex: 1;
+}
+
+.logo {
+    padding-left: 20px;
+    height: 100px;
+    width: 150px;
+}
+
+.navbar-right {
+    flex: 2; /* Ajustado para que la barra de búsqueda ocupe el 70% del ancho total */
+}
+
+input[type="text"] {
+    width: 95%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Efecto de sombra al enfocar el input */
+}
+
+@media screen and (max-width: 600px) {
+    /* Estilos específicos para dispositivos con ancho máximo de 600px (móviles) */
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .navbar-left,
+    .navbar-right {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .logo {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.sidebar {
+    background-color: #232D3F; /* Fondo oscuro del menú */
+    color: #fff;
+    padding: 0;
+    width: 23%; /* Ancho del 30% de la pantalla */
+    height: calc(100vh - 100px); /* Altura completa menos el doble del padding */
+   
+    box-sizing: border-box; /* Incluye padding en el ancho total */
+    top: 0; /* Alinear en la parte superior */
+    left: 0; /* Alinear a la izquierda */
+    overflow-y: auto; /* Agregar desplazamiento vertical si es necesario */
+    display: flex;
+    flex-direction: column;    
+}
+
+.menu-item {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    transition: background-color 0.5s;
+}
+
+.submenu-content {
+    display: none;
+    padding-left: 20px; /* Agregar un poco de espacio a las opciones del submenu */
+}
+
+.menu-item:hover .submenu-content {
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.5s;
+}
+
+.menu-item a,
+.submenu-content a {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 32.5px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.5s;
+}
+
+.menu-item:hover,
+.submenu-content:hover {
+    background-color: #555; /* Color de fondo al pasar el ratón */
+    width: 100%;
+}
+
+.submenu-content a:hover {
+    background-color: #232D3F; /* Color de fondo al pasar el ratón */
+    width: 100%;
+    border-radius: 0;
+}

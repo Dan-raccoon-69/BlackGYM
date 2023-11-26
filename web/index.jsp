@@ -1,3 +1,10 @@
+<%-- 
+    Document   : index
+    Created on : 25 nov. 2023, 16:48:29
+    Author     : Daniel
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -17,7 +24,7 @@
             <img src="img/LogoBlackGym-removebg-preview.png" class="logo" alt="Logo" width="100" height="100" />
             <h2 class="form-title">Iniciar Sesión</h2>
             <!-- action="/tu_ruta_de_procesamiento" method="post"-->
-            <form id="loginForm" class="login-form">
+            <form id="loginForm" class="login-form" action="LoginController" method="post">
                 <label for="usuario" class="form-label">Usuario:</label>
                 <input type="text" id="usuario" name="usuario" class="form-input" required />
 
