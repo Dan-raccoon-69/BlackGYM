@@ -30,7 +30,7 @@
 
                 <label for="contrasena" class="form-label">Contraseña:</label>
                 <input type="password" id="contrasena" name="contrasena" class="form-input" required />
-
+                <p class="text-danger"> ${mensaje} </p>
                 <button type="submit" class="form-button">Iniciar Sesión</button>
             </form>
         </div>

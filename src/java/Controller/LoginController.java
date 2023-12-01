@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package Controller;
 
 import Modelo.Usuario;
@@ -21,24 +17,47 @@ import javax.servlet.http.HttpSession;
  */
 public class LoginController extends HttpServlet {
 
+    
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd;
-        // enviamos respuesta, se renderiza a la vista "index.jsp"
-        rd = request.getRequestDispatcher("/index.jsp");
-        rd.forward(request, response);
+
+        // Verificar si ya hay una sesión activa
+        HttpSession session = request.getSession(false);
+
+        if (session != null && session.getAttribute("u1") != null) {
+            // Si hay una sesión activa, puede realizar otras acciones aquí si es necesario
+            String action = request.getParameter("action");
+
+            if ("irAdministracion".equals(action)) {
+                // Si el parámetro "action" es "irAdministracion", abrir admin.jsp
+                RequestDispatcher rd = request.getRequestDispatcher("/admin.jsp");
+                rd.forward(request, response);
+            } 
+            /*
+            else if ("logout".equals(action)){
+                // Si no hay una acción específica, mostrar una página predeterminada
+                RequestDispatcher rd = request.getRequestDispatcher("/default.jsp");
+                rd.forward(request, response);
+            }
+            */
+        } else {
+            // Si no hay una sesión activa, mostrar index.jsp
+            RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+            rd.forward(request, response);
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // recibiendo parametros
-
+        
         // recibiendo parametros
         String user = request.getParameter("usuario");
         String password = request.getParameter("contrasena");
-        
+        String mensaje = "";
+
         System.out.println("user: " + user);
         System.out.println("password: " + password);
 
@@ -47,15 +66,18 @@ public class LoginController extends HttpServlet {
         UsuarioDao usuario = new UsuarioDao();
         // se verifica si existe un usuario con sus respectivos datos
         Usuario u1 = usuario.login(user, password);
-
         RequestDispatcher rd;
+        //RequestDispatcher rd;
         if (u1.getId() > 0) {
             // creamos una variable de session, con el registro de usuario (Bean)
             session.setAttribute("u1", u1);
             rd = request.getRequestDispatcher("/homePage.jsp");
             rd.forward(request, response);
         } else {
-            System.out.println("Contrasenia o usuario incorecto");
+            mensaje = "Usuario y/o Contraseña incorrectos";
+            request.setAttribute("mensaje", mensaje);
+            rd = request.getRequestDispatcher("/index.jsp");
+            rd.forward(request, response);
         }
     }
 }

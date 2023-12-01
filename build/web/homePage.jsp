@@ -40,7 +40,7 @@
                 </div>
                 <div class="menu-item"><a href="#"><i class="icono"></i> Ventas</a></div>
                 <div class="menu-item"><a href="#"><i class="icono"></i> Reportes</a></div>
-                <div class="menu-item"><a href="#"><i class="icono"></i> Administrador</a></div>
+                <div class="menu-item"><a href="LoginController?action=irAdministracion"><i class="icono"></i> Administrador</a></div>
                 <div class="menu-item"><a href="#"><i class="icono"></i> Productos</a></div>
             </aside>
 
