@@ -23,19 +23,15 @@ public class AdminController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        // se recupera la session activa que viene junto con el request
         HttpSession session = request.getSession();
         RequestDispatcher rd;
-        String mensaje = "";
 
         switch (action) {
             case "inicio":
-                // significa que si hay un usuario y simplmente se redirige a admin.jsp
                 rd = request.getRequestDispatcher("/homePage.jsp");
                 rd.forward(request, response);
                 break;
             case "logout":
-                // Salir, cerramos la session
                 session.invalidate();
                 response.sendRedirect(request.getContextPath() + "/index.jsp");
                 break;

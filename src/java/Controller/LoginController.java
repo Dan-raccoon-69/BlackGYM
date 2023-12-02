@@ -17,33 +17,20 @@ import javax.servlet.http.HttpSession;
  */
 public class LoginController extends HttpServlet {
 
-    
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Verificar si ya hay una sesión activa
         HttpSession session = request.getSession(false);
 
         if (session != null && session.getAttribute("u1") != null) {
-            // Si hay una sesión activa, puede realizar otras acciones aquí si es necesario
             String action = request.getParameter("action");
 
             if ("irAdministracion".equals(action)) {
-                // Si el parámetro "action" es "irAdministracion", abrir admin.jsp
                 RequestDispatcher rd = request.getRequestDispatcher("/admin.jsp");
                 rd.forward(request, response);
-            } 
-            /*
-            else if ("logout".equals(action)){
-                // Si no hay una acción específica, mostrar una página predeterminada
-                RequestDispatcher rd = request.getRequestDispatcher("/default.jsp");
-                rd.forward(request, response);
             }
-            */
         } else {
-            // Si no hay una sesión activa, mostrar index.jsp
             RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
             rd.forward(request, response);
         }
@@ -52,7 +39,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         // recibiendo parametros
         String user = request.getParameter("usuario");
         String password = request.getParameter("contrasena");
