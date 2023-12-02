@@ -12,6 +12,9 @@ public class Usuario {
     private int id;
     private String Clav;
     private String Cont;
+    private String Nom;
+    private String ApePa;
+    private String Corr;
 
     public Usuario(int id) {
         this.id = id;
@@ -41,11 +44,34 @@ public class Usuario {
         this.Cont = Cont;
     }
 
+    public String getNom() {
+        return Nom;
+    }
+
+    public void setNom(String Nom) {
+        this.Nom = Nom;
+    }
+
+    public String getApePa() {
+        return ApePa;
+    }
+
+    public void setApePa(String ApePa) {
+        this.ApePa = ApePa;
+    }
+
+    public String getCorr() {
+        return Corr;
+    }
+
+    public void setCorr(String Corr) {
+        this.Corr = Corr;
+    }
+
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", Clav=" + Clav + ", Cont=" + Cont + '}';
+        return "Usuario{" + "id=" + id + ", Clav=" + Clav + ", Cont=" + Cont + ", Nom=" + Nom + ", ApePa=" + ApePa + ", Corr=" + Corr + '}';
     }
+
     
-    
- 
 }

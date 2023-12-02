@@ -3,7 +3,6 @@ package Controller;
 import Modelo.Usuario;
 import dao.UsuarioDao;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +15,13 @@ import javax.servlet.http.HttpSession;
  * @author Daniel
  */
 public class LoginController extends HttpServlet {
+
+    private Usuario obtenerUsuario(HttpServletRequest request) {
+        String user = request.getParameter("usuario");
+        String password = request.getParameter("contrasena");
+        UsuarioDao usuarioDao = new UsuarioDao();
+        return usuarioDao.login(user, password);
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -30,6 +36,10 @@ public class LoginController extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("/admin.jsp");
                 rd.forward(request, response);
             }
+            else if("irPlanes".equals(action)){
+                RequestDispatcher rd = request.getRequestDispatcher("/planes.jsp");
+                rd.forward(request, response);
+            }
         } else {
             RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
             rd.forward(request, response);
@@ -40,31 +50,21 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // recibiendo parametros
-        String user = request.getParameter("usuario");
-        String password = request.getParameter("contrasena");
-        String mensaje = "";
-
-        System.out.println("user: " + user);
-        System.out.println("password: " + password);
-
-        // Recuperamos una instancia del objeto HttpSession
         HttpSession session = request.getSession();
-        UsuarioDao usuario = new UsuarioDao();
-        // se verifica si existe un usuario con sus respectivos datos
-        Usuario u1 = usuario.login(user, password);
+        Usuario u1 = obtenerUsuario(request);
         RequestDispatcher rd;
-        //RequestDispatcher rd;
+
         if (u1.getId() > 0) {
-            // creamos una variable de session, con el registro de usuario (Bean)
             session.setAttribute("u1", u1);
-            rd = request.getRequestDispatcher("/homePage.jsp");
+            System.out.println(u1.toString());
+            rd = request.getRequestDispatcher("/admin.jsp");
             rd.forward(request, response);
         } else {
-            mensaje = "Usuario y/o Contraseña incorrectos";
+            String mensaje = "Usuario y/o Contraseña incorrectos";
             request.setAttribute("mensaje", mensaje);
             rd = request.getRequestDispatcher("/index.jsp");
             rd.forward(request, response);
         }
     }
 }
+

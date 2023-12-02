@@ -13,6 +13,10 @@
         <servlet-name>AdminController</servlet-name>
         <servlet-class>Controller.AdminController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PlanesController</servlet-name>
+        <servlet-class>Controller.PlanesController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -20,6 +24,10 @@
     <servlet-mapping>
         <servlet-name>AdminController</servlet-name>
         <url-pattern>/AdminController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PlanesController</servlet-name>
+        <url-pattern>/PlanesController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

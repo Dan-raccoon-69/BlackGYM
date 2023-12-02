@@ -30,7 +30,7 @@
         <!-- Contenido principal -->
         <div class="main-container">
             <aside class="sidebar">
-                <div class="menu-item"><a href="#"><i class="icono"></i> Planes</a></div>
+                <div class="menu-item"><a href="PlanesController?action=verPlanes"><i class="icono"></i> Planes</a></div>
                 <div class="menu-item submenu">
                     <a href="#"><i class="icono"></i> Socios</a>
                     <div class="submenu-content">
@@ -63,8 +63,8 @@
                                 </figure>
                             </div>
                             <div class="panel-heading">
-                                <h3><b>Inicio: 22/04/2022</b> </h3>
-                                <h3><b>Vence: 22/05/2022</b> </h3>                             
+                                <h3><b>Inicio: dd/mm/aaaa</b> </h3>
+                                <h3><b>Vence: dd/mm/aaaa</b> </h3>                             
                                 <h3><b>Paquete: Mensual</b> </h3> <br>
                             </div>
                         </div> 

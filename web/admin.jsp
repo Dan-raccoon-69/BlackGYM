@@ -32,15 +32,17 @@
 
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h2 class="panel-title">Bienvenido </h2>          
+                    <h2 class="panel-title">Bienvenido </h2>
                 </div>
                 <div class="panel-body">
-                    <h2 class="panel-title"><b>Nombre</b><br> <br><br></h2>
-                    <h2 class="panel-title"><b>Apellido Paterno</b><br> <br><br></h2>
-                    <h2 class="panel-title"><b>Email</b><br>  <br><br></h2>
-                    <h2 class="panel-title"><b>Nombre de Usuario</b><br>  <br><br></h2>
+                    <h2 class="panel-title"><b>Nombre: </b> <span style="color: #88b4db; font-style: italic;">${u1.getNom()}</span><br><br></h2>
+                    <h2 class="panel-title"><b>Apellido Paterno: </b> <span style="color: #88b4db; font-style: italic;">${u1.getApePa()}</span> <br><br></h2>
+                    <h2 class="panel-title"><b>Email: </b> <span style="color: #88b4db; text-decoration: underline; font-style: italic;">${u1.getCorr()}</span> <br><br></h2>
+                    <h2 class="panel-title"><b>Nombre de Usuario: </b> <span style="color: #88b4db; font-style: italic;">${u1.getClav()}</span> <br><br></h2>
+
                 </div>
             </div>
+
 
             <!-- Site footer -->
             <footer class="footer">

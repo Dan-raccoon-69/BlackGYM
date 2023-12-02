@@ -53,7 +53,7 @@ CREATE TABLE login (
     );
 select * from login where Clav='gabimaez' and Cont = 'abcdef' limit 1;
  drop table login;
- 
+ select * from login;
 INSERT INTO login (Clav, Cont, Nom,ApePa, ApeMa, Edad, Tele, Corr, Calle, Num, Colo, Cp, Enti, Esta) VALUES ('gabimaez', 'abcdef', 'Gabriela','Suarez', 'Maldonado', '34', 5525478963, 'GMB@outloo.com', 'Ecat', 12, 'Jardines', '55045', 'MEXICO', 'MEX');
 INSERT INTO login (Clav, Cont, Nom,ApePa, ApeMa, Edad, Tele, Corr, Calle, Num, Colo, Cp, Enti, Esta) VALUES ('natarodri', 'fedcba', 'Natalia','Rodriguez', 'Lugo', '24', 5525478947, 'nattt@outloo.com', 'Ecat', 78, 'Americas', '55044', 'MEXICO', 'MEX');
 
@@ -63,12 +63,15 @@ CREATE TABLE Planes (
     Nom varchar(50),
     P INT
     );
-    
+    use gym;
+    select * from Planes order by NumPlan asc;
     insert into planes (NumPlan, Nom, P) values (1,'anualidad',2500);
 	insert into planes (NumPlan, Nom, P) values (2,'mes',350);
 	insert into planes (NumPlan, Nom, P) values (3,'trimestre',900);
-	
     
+    -- Cambia el valor de la columna "Nom" a "NuevoNombre" en el registro con NumPlan igual a 1
+UPDATE Planes SET Nom = 'Trimestre' WHERE NumPlan = 3;
+select * from Planes;
 /************************************************************************************************ */
     CREATE TABLE Ventas (
     FolV INT AUTO_INCREMENT PRIMARY KEY,

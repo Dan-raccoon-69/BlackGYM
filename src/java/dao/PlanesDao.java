@@ -1,15 +1,24 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package dao;
 
-import Modelo.Usuario;
+import Modelo.Planes;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
-public class UsuarioDao {
-
-    public static final String url = "jdbc:mysql://localhost:3306/gym";
+/**
+ *
+ * @author Daniel
+ */
+public class PlanesDao {
+     public static final String url = "jdbc:mysql://localhost:3306/gym";
     public static final String usuario = "root";
     public static final String contraseña = "616263646566676869";
 
@@ -32,41 +41,26 @@ public class UsuarioDao {
         }
     }
 
-    public Usuario login(String user, String pass) {
+    public List<Planes> obtenerTodosLosPlanes() {
         try {
             Connection conn = getConnection();
-
-            if (conn == null) {
-                // La conexión no se pudo establecer, manejar según sea necesario
-                return null;
-            }
-
-            String sql = "select * from login where Clav=? and Cont =? limit 1";
+            String sql = "select * from Planes order by NumPlan asc";
             ps = conn.prepareStatement(sql);
-            ps.setString(1, user);
-            ps.setString(2, pass);
             rs = ps.executeQuery();
-
-            Usuario usuario = new Usuario(0);
-
+            List<Planes> list = new LinkedList<>();
+            Planes plan;
             while (rs.next()) {
-                usuario.setId(rs.getInt("idR"));
-                usuario.setClav(rs.getString("Clav"));
-                usuario.setCont(rs.getString("Cont"));
-                usuario.setNom(rs.getString("Nom"));
-                usuario.setApePa(rs.getString("ApePa"));
-                usuario.setCorr(rs.getString("Corr"));
+                plan = new Planes(rs.getInt("NumPlan"));
+                plan.setNom(rs.getString("Nom"));
+                plan.setP(rs.getInt("P"));
+                list.add(plan);
             }
-
-            // Cerrar la conexión y recursos después de su uso
-            rs.close();
-            ps.close();
-            conn.close();
-
-            return usuario;
+            System.out.println("DAO");
+            for (Planes planes : list) {
+                System.out.println(planes.toString() + " ");
+            }
+            return list;
         } catch (SQLException ex) {
-            // Manejar la excepción (imprimir o lanzar una nueva)
-            ex.printStackTrace();
             return null;
         }
     }
