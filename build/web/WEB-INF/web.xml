@@ -17,6 +17,10 @@
         <servlet-name>PlanesController</servlet-name>
         <servlet-class>Controller.PlanesController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BuscarController</servlet-name>
+        <servlet-class>Controller.BuscarController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -28,6 +32,10 @@
     <servlet-mapping>
         <servlet-name>PlanesController</servlet-name>
         <url-pattern>/PlanesController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuscarController</servlet-name>
+        <url-pattern>/BuscarController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

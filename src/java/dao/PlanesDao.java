@@ -64,4 +64,26 @@ public class PlanesDao {
             return null;
         }
     }
+    
+    public List<Planes> buscarPlan(String planAbuscar) {
+        try {
+            Connection conn = getConnection();
+            String sql = "select * from Planes where Nom like ?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1,"%"+planAbuscar+"%");
+            rs = ps.executeQuery();
+            List<Planes> planEncontrado = new LinkedList<>();
+            Planes plan;
+            while (rs.next()) {     
+                plan = new Planes(rs.getInt("NumPlan"));
+                plan.setNom(rs.getString("Nom"));
+                plan.setP(rs.getInt("P"));
+                planEncontrado.add(plan);
+            }
+            return planEncontrado;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
 }

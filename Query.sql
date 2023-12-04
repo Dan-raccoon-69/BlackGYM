@@ -72,6 +72,8 @@ CREATE TABLE Planes (
     -- Cambia el valor de la columna "Nom" a "NuevoNombre" en el registro con NumPlan igual a 1
 UPDATE Planes SET Nom = 'Trimestre' WHERE NumPlan = 3;
 select * from Planes;
+use gym;
+select * from Planes where Nom like 'anualidad';
 /************************************************************************************************ */
     CREATE TABLE Ventas (
     FolV INT AUTO_INCREMENT PRIMARY KEY,
