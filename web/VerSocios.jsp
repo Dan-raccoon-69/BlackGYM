@@ -34,7 +34,7 @@
         </div>
         <form method ="post" action="BuscarSociosController" class="navbar-form navbar-right">
             <div class="form-group">
-                <input type="text" name="query" required placeholder="Buscar Socio..." class="form-control">
+                <input type="text" autocomplete="off" name="query" required placeholder="Buscar Socio..." class="form-control">
             </div>        
             <button type="submit" class="btn btn-success">Buscar</button>
         </form>

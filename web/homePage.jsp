@@ -13,39 +13,33 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
         <!-- Agrega el script JavaScript para el autocompletado -->
-        <!-- Agrega el script JavaScript para el autocompletado -->
         <script>
             $(document).ready(function () {
-                // Captura el evento de escribir en el campo de búsqueda
                 $("#searchInput").on("input", function () {
-                    // Obtén el valor del campo de búsqueda
                     var query = $(this).val();
-
-                    // Realiza una solicitud AJAX al servidor para obtener sugerencias
                     $.ajax({
                         type: "POST",
                         url: "AutocompleteController",
                         data: {query: query},
                         success: function (data) {
-                            // Log de los datos recibidos en la consola
-                            console.log("Datos recibidos:", data);
-
-                            // Actualiza el contenido de la lista de sugerencias
                             var suggestionList = $("#suggestionList");
-                            suggestionList.empty(); // Limpia las sugerencias anteriores
+                            suggestionList.empty();
 
-                            // Agrega las nuevas sugerencias
+                            // Recorre las sugerencias y crea enlaces para cada una
                             data.forEach(function (suggestion) {
-                                suggestionList.append("<li>" + suggestion.Nom + "</li>");
+                                // Crea un enlace <a> con el nombre del socio
+                                var link = $("<a>")
+                                        .attr("href", "#") // Puedes proporcionar un enlace real aquï¿½ si lo deseas
+                                        .text(suggestion.Nom);
+
+                                // Agrega el enlace al contenedor de sugerencias
+                                suggestionList.append(link);
                             });
-                        },
-                        error: function (error) {
-                            // Log de cualquier error en la consola
-                            console.error("Error en la solicitud AJAX:", error);
                         }
                     });
                 });
             });
+
         </script>
 
 
@@ -57,13 +51,16 @@
             <div class="navbar-left">
                 <img src="img/LogoBlackGym-removebg-preview.png" alt="Logo de BlackGym" class="logo">
             </div>
-            <form method="post" class="navbar-form navbar-right" id="searchForm">
-                <div class="form-group">
-                    <input type="text" name="query" required placeholder="Buscar Socio..." class="form-control" id="searchInput">
-                </div>
-            </form>
-            <div id="suggestionsContainer" class="suggestions-container">
-                <ul id="suggestionList"></ul>
+            <div class="contenedorBuscardor">
+                <form method="post" class="navbar-form navbar-right" id="searchForm">
+                    <div class="form-group">
+                        <input type="text" autocomplete="off" name="query" required placeholder="Buscar Socio..." class="form-control" id="searchInput">
+                    </div>
+                </form>
+                <div id="suggestionsContainer">
+                    <!-- CambiÃ© la lista ul por un contenedor div -->
+                    <div id="suggestionList"></div>
+                </div>        
             </div>
 
             <!-- Agregamos el botï¿½n de hamburguesa para dispositivos mï¿½viles -->

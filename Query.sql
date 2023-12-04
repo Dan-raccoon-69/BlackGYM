@@ -36,7 +36,8 @@ INSERT INTO socios (Nom, Eda, Tel, CorElec, Cal, Num, Col, Cp, Ent, Est, NumPlan
 VALUES ('Paola Garza Rodriguez', '25', 5500112244, 'Paol4@outlook.com', 'Pedregal', 123, 'Col alpha', '014589', 'Mexico', 'Mexico', 3 ,'2023-06-26', '2023-09-26');
 INSERT INTO socios (Nom, Eda, Tel, CorElec, Cal, Num, Col, Cp, Ent, Est, NumPlan, Inp, FiP)
 VALUES ('Carlos Chagolla Hernandez', '33', 5517182032, 'CCHO32@outloo.com', 'Sanchez', 123, 'Nogal', '551636', 'Guanajuato', 'GTO', 1, '2023-11-11', '2024-11-11');
-
+INSERT INTO socios (Nom, Eda, Tel, CorElec, Cal, Num, Col, Cp, Ent, Est, NumPlan, Inp, FiP)
+VALUES ('Daniel Gustavo De La Cruz Bautista', '21', 5512453095, 'gustavodlc21@gmail.com', 'Ramon', 7, 'Texalpa', '55123', 'Mexico', 'Mexico', 1, '2023-11-12', '2024-11-12');
 select * from socios;
 
 CREATE TABLE login (

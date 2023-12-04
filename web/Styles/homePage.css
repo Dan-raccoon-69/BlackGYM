@@ -68,8 +68,8 @@ body {
 }
 
 .btn-success:hover {
-    background-color: #2980b9;
-    border-color: #2980b9;
+    background-color: #148dde;
+    border-color: #148dde;
     color: #fff;
 }
 
@@ -282,4 +282,34 @@ body {
         text-align: center;
         font-size: 25px;
     }
+}
+
+/* Estilos para el contenedor de sugerencias */
+#suggestionsContainer {
+    position: relative; /* Para posicionar las sugerencias de forma absoluta con respecto al contenedor */
+}
+
+/* Estilos para cada enlace de sugerencia */
+#suggestionList a {
+    
+    display: block;
+    padding: 5px;
+    background-color: #000000;  
+    border: 1px solid #232D3F;
+    margin: 5px 0;
+    text-decoration: none;
+    color: #e5e1e1;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bolder;
+}
+
+/* Estilos para resaltar el enlace cuando el mouse pasa sobre él */
+#suggestionList a:hover {
+    background-color: #232D3F;
+}
+
+.navbar .contenedorBuscardor{
+    display: flex;
+    flex-direction: column;
 }
