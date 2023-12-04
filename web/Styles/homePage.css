@@ -32,18 +32,60 @@ body {
     flex: 2; /* Ajustado para que la barra de búsqueda ocupe el 70% del ancho total */
 }
 
-input[type="text"] {
-    width: 95%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
+/* Estilos para el formulario de búsqueda */
+.navbar-form {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
-input[type="text"]:focus {
-    outline: none;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Efecto de sombra al enfocar el input */
+.form-group {
+    margin-bottom: 0;
 }
+
+.form-control {
+    width: 700px;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #3498db; /* Cambia el color del borde al enfocar el campo */
+}
+
+.btn-success {
+    background-color: #3498db;
+    border-color: #3498db;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.btn-success:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+    color: #fff;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 600px) {
+    .navbar-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .form-control {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
 
 @media screen and (max-width: 600px) {
     /* Estilos específicos para dispositivos con ancho máximo de 600px (móviles) */
@@ -224,6 +266,9 @@ input[type="text"]:focus {
     max-width: 250px;
 }
 
+#suggestionList {
+    color: white; /* Cambia esto al color de texto que prefieras */
+}
 /* Mostrar el menú hamburguesa solo en dispositivos móviles */
 @media screen and (max-width: 600px) {
     .cuadrados_container{
@@ -231,5 +276,10 @@ input[type="text"]:focus {
         height: fit-content;
         display: flex;
         flex-direction: column;
+    }
+    
+    .panel-heading h2, h3, figure{
+        text-align: center;
+        font-size: 25px;
     }
 }

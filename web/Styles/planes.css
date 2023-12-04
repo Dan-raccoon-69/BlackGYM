@@ -16,6 +16,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this t
     background-color: #333; /* Fondo oscuro */
     color: #fff; /* Texto blanco */
     border-radius: 5px;
+    text-align: center;
 }
 
 /* Estilo para las filas de encabezado */
@@ -28,7 +29,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this t
 /* Estilo para las celdas de encabezado y cuerpo */
 .table th, .table td {
     padding: 15px;
-    text-align: left;
+    text-align: center;
     border-bottom: 1px solid #444; /* Borde inferior oscuro */
 }
 
@@ -64,6 +65,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this t
 /* Estilo para el cuerpo del panel */
 .panel-body {
     padding: 20px;
+    
 }
 
 /* Estilo para los botones dentro de las celdas */

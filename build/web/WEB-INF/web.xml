@@ -21,6 +21,18 @@
         <servlet-name>BuscarController</servlet-name>
         <servlet-class>Controller.BuscarController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SociosController</servlet-name>
+        <servlet-class>Controller.SociosController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BuscarSociosController</servlet-name>
+        <servlet-class>Controller.BuscarSociosController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AutocompleteController</servlet-name>
+        <servlet-class>Controller.AutocompleteController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -36,6 +48,18 @@
     <servlet-mapping>
         <servlet-name>BuscarController</servlet-name>
         <url-pattern>/BuscarController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SociosController</servlet-name>
+        <url-pattern>/SociosController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuscarSociosController</servlet-name>
+        <url-pattern>/BuscarSociosController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AutocompleteController</servlet-name>
+        <url-pattern>/AutocompleteController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -18,7 +18,7 @@ import java.util.List;
  * @author Daniel
  */
 public class PlanesDao {
-     public static final String url = "jdbc:mysql://localhost:3306/gym";
+    public static final String url = "jdbc:mysql://localhost:3306/gym";
     public static final String usuario = "root";
     public static final String contraseña = "616263646566676869";
 

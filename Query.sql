@@ -4,8 +4,6 @@ show databases;
 CREATE TABLE socios (
     fol INT AUTO_INCREMENT PRIMARY KEY,
     Nom VARCHAR(50),
-    ApePa VARCHAR(50),
-    ApeMa VARCHAR(50),
     Eda VARCHAR(2),
     Tel VARCHAR(10),
     CorElec VARCHAR(50),
@@ -20,17 +18,24 @@ CREATE TABLE socios (
     FiP DATE,
     FOREIGN KEY (NumPlan) REFERENCES Planes(NumPlan)
 );
+select * from socios;
+select * from socios order by fol asc;
+drop table socios;
+use gym;
+select * from socios where (Nom like ? or ApePa like ?);
+select * from socios where (Nom like 'juan perez') order by fol asc;
+SELECT * FROM socios WHERE Nom LIKE '%juan perez%' ORDER BY fol ASC;
 
-INSERT INTO socios (Nom,ApePa, ApeMa, Eda, Tel, CorElec, Cal, Num, Col, Cp, Ent, Est, NumPlan, Inp, FiP)
-VALUES ('Juan','Perez', 'Martinez', '25', 5517182030, 'MARTo12@example.com', 'Sanchez', 123, 'Col olimpica', '55040', 'Mexico', 'Mexico', 1, '2023-01-01', '2023-12-31');
-INSERT INTO socios (Nom,ApePa, ApeMa, Eda, Tel, CorElec, Cal, Num, Col, Cp, Ent, Est, NumPlan, Inp, FiP)
-VALUES ('Mariana','Rodriguez', 'Guerrero', '23', 5512658510, 'MARIA23@Gmail.com', 'Resina', 123, 'Col olimpica', '565047', 'Mexico', 'Mexico', 1, '2023-06-18', '2024-06-18');
-INSERT INTO socios (Nom,ApePa, ApeMa, Eda, Tel, CorElec, Cal, Num, Col, Cp, Ent, Est, NumPlan, Inp, FiP)
-VALUES ('Avril','Gonzale', 'Martinez', '21', 5566887744, 'Avg12@yahoo.com', 'Te', 123, 'Col olimpica', '55041', 'Mexico', 'Mexico', 2, '2023-11-26', '2024-12-26');
-INSERT INTO socios (Nom,ApePa, ApeMa, Eda, Tel, CorElec, Cal, Num, Col, Cp, Ent, Est, NumPlan, Inp, FiP)
-VALUES ('Paola','Garza', 'Rodriguez', '25', 5500112244, 'Paol4@outlook.com', 'Pedregal', 123, 'Col alpha', '014589', 'Mexico', 'Mexico', 3 ,'2023-06-18', '2024-09-18');
-INSERT INTO socios (Nom,ApePa, ApeMa, Eda, Tel, CorElec, Cal, Num, Col, Cp, Ent, Est, NumPlan, Inp, FiP)
-VALUES ('Carlos','Chagolla', 'Hernandez', '33', 5517182032, 'CCHO32@outloo.com', 'Sanchez', 123, 'Nogal', '551636', 'Guanajuato', 'GTO', 1, '2023-11-11', '2024-11-11');
+INSERT INTO socios (Nom, Eda, Tel, CorElec, Cal, Num, Col, Cp, Ent, Est, NumPlan, Inp, FiP)
+VALUES ('Juan Perez Martinez', '25', 5517182030, 'MARTo12@example.com', 'Sanchez', 123, 'Col olimpica', '55040', 'Mexico', 'Mexico', 1, '2023-11-01', '2024-11-01');
+INSERT INTO socios (Nom, Eda, Tel, CorElec, Cal, Num, Col, Cp, Ent, Est, NumPlan, Inp, FiP)
+VALUES ('Mariana Rodriguez Guerrero', '23', 5512658510, 'MARIA23@Gmail.com', 'Resina', 123, 'Col olimpica', '565047', 'Mexico', 'Mexico', 1, '2023-06-18', '2024-06-18');
+INSERT INTO socios (Nom, Eda, Tel, CorElec, Cal, Num, Col, Cp, Ent, Est, NumPlan, Inp, FiP)
+VALUES ('Avril Gonzale Martinez', '21', 5566887744, 'Avg12@yahoo.com', 'Te', 123, 'Col olimpica', '55041', 'Mexico', 'Mexico', 2, '2023-11-26', '2023-12-26');
+INSERT INTO socios (Nom, Eda, Tel, CorElec, Cal, Num, Col, Cp, Ent, Est, NumPlan, Inp, FiP)
+VALUES ('Paola Garza Rodriguez', '25', 5500112244, 'Paol4@outlook.com', 'Pedregal', 123, 'Col alpha', '014589', 'Mexico', 'Mexico', 3 ,'2023-06-26', '2023-09-26');
+INSERT INTO socios (Nom, Eda, Tel, CorElec, Cal, Num, Col, Cp, Ent, Est, NumPlan, Inp, FiP)
+VALUES ('Carlos Chagolla Hernandez', '33', 5517182032, 'CCHO32@outloo.com', 'Sanchez', 123, 'Nogal', '551636', 'Guanajuato', 'GTO', 1, '2023-11-11', '2024-11-11');
 
 select * from socios;
 
