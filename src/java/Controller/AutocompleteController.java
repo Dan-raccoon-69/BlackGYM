@@ -30,10 +30,10 @@ public class AutocompleteController extends HttpServlet {
         response.getWriter().write(jsonResponse);
     }
 
+    // Modifica el método convertirSugerenciasAJson en AutocompleteController.java
     private String convertirSugerenciasAJson(List<Socio> sugerencias) {
-        // Utiliza Gson para convertir la lista de sugerencias a JSON
+        // Usa Gson para convertir directamente la lista de objetos Socio a JSON
         Gson gson = new Gson();
-        String json = gson.toJson(sugerencias);
-        return json;
+        return gson.toJson(sugerencias);
     }
 }

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<%@ page import="java.net.URLEncoder" %><!DOCTYPE html>
 <html lang="es">
     <head>
         <meta charset="UTF-8">
@@ -15,33 +15,54 @@
         <!-- Agrega el script JavaScript para el autocompletado -->
         <script>
             $(document).ready(function () {
+                // Captura el evento de escribir en el campo de búsqueda
                 $("#searchInput").on("input", function () {
+                    // Obtén el valor del campo de búsqueda
                     var query = $(this).val();
+
+                    // Realiza una solicitud AJAX al servidor para obtener sugerencias
                     $.ajax({
                         type: "POST",
                         url: "AutocompleteController",
                         data: {query: query},
                         success: function (data) {
+                            // Verifica si data es un objeto y no una cadena
+                            var suggestions = typeof data === 'string' ? JSON.parse(data) : data;
+
+                            // Actualiza el contenido de la lista de sugerencias
                             var suggestionList = $("#suggestionList");
-                            suggestionList.empty();
+                            suggestionList.empty(); // Limpia las sugerencias anteriores
 
-                            // Recorre las sugerencias y crea enlaces para cada una
-                            data.forEach(function (suggestion) {
-                                // Crea un enlace <a> con el nombre del socio
-                                var link = $("<a>")
-                                        .attr("href", "#") // Puedes proporcionar un enlace real aquï¿½ si lo deseas
-                                        .text(suggestion.Nom);
-
-                                // Agrega el enlace al contenedor de sugerencias
-                                suggestionList.append(link);
+                            // Agrega las nuevas sugerencias como enlaces
+                            suggestions.forEach(function (suggestion) {
+                                suggestionList.append("<a href='#' data-nom='" + suggestion.Nom + "' data-inp='" + suggestion.Inp + "' data-fip='" + suggestion.Fip + "' data-fol='" + suggestion.fol + "'>" + suggestion.Nom + "</a>");
                             });
                         }
                     });
                 });
+
+                // Maneja el clic en un enlace de sugerencia
+                $("#suggestionList").on("click", "a", function (event) {
+                    event.preventDefault();
+
+                    // Obtén los datos del enlace clicado
+                    var selectedSocio = {
+                        fol: $(this).data("fol"),
+                        Nom: $(this).data("nom"),
+                        Inp: $(this).data("inp"),
+                        Fip: $(this).data("fip")
+                    };
+
+                    // Realiza alguna acción con los datos del socio
+                    console.log("Datos del socio seleccionado:", selectedSocio);
+
+                    // Redirecciona a la página deseada con los parámetros del socio
+                    window.location.href = "homePage.jsp?nombre=" + encodeURIComponent(selectedSocio.Nom) + "&inp=" + selectedSocio.Inp + "&fip=" + selectedSocio.Fip + "&fol=" + selectedSocio.fol;
+                    console.log("Datos del socio seleccionado:", selectedSocio);
+                });
             });
 
         </script>
-
 
     </head>
     <body>
@@ -58,9 +79,8 @@
                     </div>
                 </form>
                 <div id="suggestionsContainer">
-                    <!-- CambiÃ© la lista ul por un contenedor div -->
-                    <div id="suggestionList"></div>
-                </div>        
+                    <ul id="suggestionList"></ul>
+                </div>
             </div>
 
             <!-- Agregamos el botï¿½n de hamburguesa para dispositivos mï¿½viles -->
@@ -96,10 +116,9 @@
                 <div class="cuadrados_container">
 
                     <div class="square">
-                        <div class="aquare-info">
+                        <div class="square-info">
                             <div class="panel-heading">
-                                <!-- <h3 class="panel-title"> Numero de Vacante: ${vacante.id}</h3> -->
-                                <h2 class="panel-title"> ${socio.getNom()} </h3>
+                                <h2 class="panel-title"> ${param.nombre} </h3>
                             </div>
                             <div class="panel-heading">
                                 <figure>
@@ -107,9 +126,9 @@
                                 </figure>
                             </div>
                             <div class="panel-heading">
-                                <h3><b>Inicio: ${socio.getInp()}</b> </h3>
-                                <h3><b>Vence: ${socio.getFip()}</b> </h3>                             
-                                <h3><b>Paquete: ${socio.getFip()} </b> </h3> <br>
+                                <h3><b>Folio: ${param.fol} </b> </h3>
+                                <h3><b>Inicio: ${param.inp} </b> </h3>
+                                <h3><b>Vence: ${param.fip} </b> </h3>                                                           
                             </div>
                         </div> 
                     </div>
