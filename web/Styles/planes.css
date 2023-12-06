@@ -101,6 +101,7 @@ tr .text-right{
 
 form.navbar-right{
     text-align: right;
+    width: 100% !important;
 }
 
 .form-group {
@@ -113,6 +114,8 @@ form.navbar-right{
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    height: max-content;
+    margin: 0;
 }
 
 /* ... Otros estilos ... */

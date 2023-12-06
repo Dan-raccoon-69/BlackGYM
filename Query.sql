@@ -39,7 +39,8 @@ VALUES ('Carlos Chagolla Hernandez', '33', 5517182032, 'CCHO32@outloo.com', 'San
 INSERT INTO socios (Nom, Eda, Tel, CorElec, Cal, Num, Col, Cp, Ent, Est, NumPlan, Inp, FiP)
 VALUES ('Daniel Gustavo De La Cruz Bautista', '21', 5512453095, 'gustavodlc21@gmail.com', 'Ramon', 7, 'Texalpa', '55123', 'Mexico', 'Mexico', 1, '2023-11-12', '2024-11-12');
 select * from socios;
-
+use gym;
+select * from Planes where Nom like "%" 'anu' "%";
 CREATE TABLE login (
 	idR INT AUTO_INCREMENT PRIMARY KEY,
     Clav varchar(50) ,
