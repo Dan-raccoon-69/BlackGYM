@@ -50,10 +50,6 @@ public class PlanesController extends HttpServlet {
         List<Planes> todas = new LinkedList<>();
         PlanesDao plan = new PlanesDao();
         todas = plan.obtenerTodosLosPlanes();
-        System.out.println("DESDE CONTROLLER");
-        for (Planes planes : todas) {
-            System.out.println(planes.toString() + " ");
-        }
         RequestDispatcher rd;
         // compartimos la variable ultimas, para poder acceder la vista con Expression Language
         request.setAttribute("todas", todas);
@@ -65,7 +61,26 @@ public class PlanesController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        String nombreParametro = request.getParameter("nombre");
+        String precioParametro = request.getParameter("precio");
+        int precio = Integer.parseInt(precioParametro);
+
+        Planes plan1 = new Planes(0);
+        plan1.setNom(nombreParametro);
+        plan1.setP(precio);
+
+        PlanesDao pla = new PlanesDao();
+        boolean resultado = pla.insertar(plan1);
+
+        String mensaje = "";
+        if (resultado) {
+            mensaje = "La vacante fue guardada correctamente.";
+            System.out.println(mensaje);
+        } else {
+            mensaje = "Ocurrio un error, El Plan no fue grabado.";
+            System.out.println(mensaje);
+        }
+        verTodosLosPlanes(request, response);
     }
 
 

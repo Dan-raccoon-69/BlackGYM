@@ -36,7 +36,7 @@
 
             <div id="crearPlanForm" class="invisible" style="display: none">
                 <div class="form-container">
-                    <form class="custom-form">
+                    <form class="custom-form" method ="post" action="PlanesController">
                         <label for="nombre" class="form-label">Nombre:</label>
                         <input type="text" autocomplete="off" id="nombre" name="nombre" class="form-input" required>
 

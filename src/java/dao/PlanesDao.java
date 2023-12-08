@@ -25,6 +25,21 @@ public class PlanesDao {
     PreparedStatement ps;
     ResultSet rs;
 
+    public boolean insertar(Planes plan) {
+        String sql = "insert into Planes (Nom, P) values (?, ?)";
+
+        try {
+            Connection conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, plan.getNom());
+            ps.setInt(2, plan.getP());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
     // Método para obtener la conexión
     private Connection getConnection() {
         try {
@@ -54,10 +69,6 @@ public class PlanesDao {
                 plan.setNom(rs.getString("Nom"));
                 plan.setP(rs.getInt("P"));
                 list.add(plan);
-            }
-            System.out.println("DAO");
-            for (Planes planes : list) {
-                System.out.println(planes.toString() + " ");
             }
             return list;
         } catch (SQLException ex) {
