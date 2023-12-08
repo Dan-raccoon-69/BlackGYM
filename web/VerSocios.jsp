@@ -27,7 +27,7 @@
             <nav>
                 <ul class="nav nav-justified">
                     <li><a href="PlanesController?action=inicio">Inicio</a></li>            
-                    <li><a href="#">Planes</a></li>                        
+                    <li><a href="PlanesController?action=verPlanes">Planes</a></li>                        
                     <li><a href="#">Productos</a></li>            
                 </ul>
             </nav>

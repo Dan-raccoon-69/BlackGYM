@@ -65,7 +65,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this t
 /* Estilo para el cuerpo del panel */
 .panel-body {
     padding: 20px;
-    
+
 }
 
 /* Estilo para los botones dentro de las celdas */
@@ -79,6 +79,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this t
     border-radius: 3px;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out;
     text-align: center;
+    cursor: pointer;
 }
 
 /* Estilo para los botones dentro de las celdas en hover */
@@ -128,6 +129,7 @@ form.navbar-right{
     margin: 0 5px;
     border-radius: 5px;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out; /* Transición suave */
+    
 }
 
 /* Estilos de hover para el botón de búsqueda */
@@ -135,6 +137,91 @@ form.navbar-right{
     background-color: #2980b9; /* Cambia el color al pasar el ratón */
     border-color: #2980b9;
     color: #fff; /* Texto blanco */
+    cursor: pointer;
+}
+
+#crearPlanForm {
+    margin-top: 20px;
+}
+
+#crearPlanForm form {
+    max-width: 300px;
+    margin: 0 auto;
+    background-color: #1e1e1e;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#crearPlanForm label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#crearPlanForm input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+#crearPlanLink {
+    cursor: pointer;
+}
+
+.invisible {
+    display: none;
+}
+
+
+/* Cambié la clase 'modern-form' por 'custom-form' en el HTML */
+.custom-form .form-container {
+    max-width: 400px;
+    height: 230px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.custom-form .form-label {
+    display: block;
+    text-align: left;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #fff; 
+}
+
+.custom-form .form-input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #444; 
+    border-radius: 4px;
+    background-color: #333; 
+    color: #fff;
+}
+
+.custom-form .form-button {
+    width: 100%;
+    background-color: #3498db;
+    color: #fff;
+    padding: 5px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.custom-form .form-button:hover {
+    background-color: #2980b9;
+}
+
+@media (max-width: 600px) {
+    .custom-form .form-container {
+        width: 100%;
+    }
 }
 
 /* Estilos para dispositivos móviles */
@@ -155,12 +242,15 @@ form.navbar-right{
         font-size: 14px;
         text-align: center;
     }
-    
+
     .panel-default,
     .panel-body{
         font-size: 14px;
         padding: 0 0 !important;
     }
-    
+
+    .form-container {
+        width: 100%;
+    }
 
 }

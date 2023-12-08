@@ -23,7 +23,7 @@
                 <nav>
                     <ul class="nav nav-justified">
                         <li><a href="AdminController?action=inicio">Inicio</a></li>            
-                        <li><a href="#">Socios</a></li>                           
+                        <li><a href="SociosController?action=verSocios">Socios</a></li>                           
                         <li><a href="AdminController?action=logout">Salir</a></li>            
                     </ul>
                 </nav>
