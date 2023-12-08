@@ -62,6 +62,21 @@ public class PlanesDao {
         }
         return null; // Devuelve null si no se encuentra ningún plan con el número dado
     }
+    
+    public int borrarPlan(int idPlan){
+        String sql = "delete from Planes where NumPlan=?";
+        try {
+            Connection conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1,idPlan);
+            // ExecuteUpdate se utiliza para insertar, eliminar o modificar
+            int r = ps.executeUpdate();
+            return r;
+        } catch (SQLException ex) {
+            System.out.println("Error PlanesDao.eliminar" + ex.getMessage());
+            return 0;
+        }
+    }
 
     public boolean actualizarPlan(Planes plan) {
         String sql = "UPDATE Planes SET Nom=?, P=? WHERE NumPlan=?";

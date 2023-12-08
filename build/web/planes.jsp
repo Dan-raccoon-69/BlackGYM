@@ -70,7 +70,7 @@
                                     <td>${plan.getP()}</td>
                                     <td class="text-right">
                                         <a class="btn btn-default" href="PlanesController?action=modificar&NumPlan=${plan.getNumPlan()}" role="button">Modificar</a>  
-                                        <a class="btn btn-default" href="#" role="button">Eliminar</a>
+                                        <a class="btn btn-default" href="PlanesController?action=eliminar&NumPlan=${plan.getNumPlan()}" role="button">Eliminar</a>
                                     </td> 
                                 </tr>
                             </c:forEach>>

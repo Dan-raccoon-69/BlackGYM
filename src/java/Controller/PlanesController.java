@@ -29,6 +29,7 @@ public class PlanesController extends HttpServlet {
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
         RequestDispatcher rd;
+        String mensaje = "";
 
         switch (action) {
             case "inicio":
@@ -53,9 +54,36 @@ public class PlanesController extends HttpServlet {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/modificarPlan.jsp");
                 dispatcher.forward(request, response);
                 break;
+            case "eliminar":
+                if (session.getAttribute("u1") == null) {
+                    mensaje = "Acceso Denegado.";
+                    request.setAttribute("mensaje", mensaje);
+                    rd = request.getRequestDispatcher("/login.jsp");
+                    rd.forward(request, response);
+                } else {
+                    this.eliminarPlan(request, response);
+                }
+                break;
             default:
                 throw new AssertionError();
         }
+    }
+    
+    private void eliminarPlan(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // se recibe el id del plan que vamos a eliminar
+        int idPlan = Integer.parseInt(request.getParameter("NumPlan"));
+        PlanesDao pla = new PlanesDao();
+        int respuesta = pla.borrarPlan(idPlan);
+        String mensaje = "";
+        if (respuesta == 1) {
+            mensaje = "El Plan fue eliminado correctamente.";
+            System.out.println(mensaje);
+        } else {
+            mensaje = "El Plan no fue eliminado correctamente.";
+            System.out.println(mensaje);
+        }
+        verTodosLosPlanes(request, response);
     }
 
     protected void verTodosLosPlanes(HttpServletRequest request, HttpServletResponse response)
