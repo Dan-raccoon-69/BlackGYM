@@ -43,7 +43,7 @@
                         <label for="precio" class="form-label">Precio:</label>
                         <input type="text" autocomplete="off" id="precio" name="precio" class="form-input" required>
 
-                        <button type="submit" class="form-button">Guardar Plan</button>
+                        <button type="submit" class="form-button" name="action" value="insertar">Guardar Plan</button>
                     </form>
                 </div>
             </div>
@@ -82,9 +82,7 @@
             <footer class="footer">
                 <p>&copy; 2023 BlackGym, The Godfathers.</p>
             </footer>
-
-
         </div>
-        <script src="Js/script.js"></script>
+        <script src="Js/crearPlanes.js"></script>
     </body>
 </html>

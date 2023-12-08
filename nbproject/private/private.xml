@@ -5,7 +5,6 @@
         <group>
             <file>file:/C:/Users/Daniel/OneDrive%20-%20Instituto%20Politecnico%20Nacional/JAVA/BlackGym/web/Styles/planes.css</file>
             <file>file:/C:/Users/Daniel/OneDrive%20-%20Instituto%20Politecnico%20Nacional/JAVA/BlackGym/src/java/Controller/AutocompleteController.java</file>
-            <file>file:/C:/Users/Daniel/OneDrive%20-%20Instituto%20Politecnico%20Nacional/JAVA/BlackGym/web/Js/script.js</file>
             <file>file:/C:/Users/Daniel/OneDrive%20-%20Instituto%20Politecnico%20Nacional/JAVA/BlackGym/web/Styles/homePage.css</file>
             <file>file:/C:/Users/Daniel/OneDrive%20-%20Instituto%20Politecnico%20Nacional/JAVA/BlackGym/web/admin.jsp</file>
             <file>file:/C:/Users/Daniel/OneDrive%20-%20Instituto%20Politecnico%20Nacional/JAVA/BlackGym/src/java/Modelo/Socio.java</file>
@@ -14,6 +13,7 @@
             <file>file:/C:/Users/Daniel/OneDrive%20-%20Instituto%20Politecnico%20Nacional/JAVA/BlackGym/web/Styles/login.css</file>
             <file>file:/C:/Users/Daniel/OneDrive%20-%20Instituto%20Politecnico%20Nacional/JAVA/BlackGym/src/java/Modelo/Usuario.java</file>
             <file>file:/C:/Users/Daniel/OneDrive%20-%20Instituto%20Politecnico%20Nacional/JAVA/BlackGym/src/java/Controller/PlanesController.java</file>
+            <file>file:/C:/Users/Daniel/OneDrive%20-%20Instituto%20Politecnico%20Nacional/JAVA/BlackGym/web/Js/modificarPlanes.js</file>
             <file>file:/C:/Users/Daniel/OneDrive%20-%20Instituto%20Politecnico%20Nacional/JAVA/BlackGym/web/META-INF/context.xml</file>
             <file>file:/C:/Users/Daniel/OneDrive%20-%20Instituto%20Politecnico%20Nacional/JAVA/BlackGym/src/java/Modelo/Planes.java</file>
             <file>file:/C:/Users/Daniel/OneDrive%20-%20Instituto%20Politecnico%20Nacional/JAVA/BlackGym/web/WEB-INF/web.xml</file>
@@ -21,7 +21,9 @@
             <file>file:/C:/Users/Daniel/OneDrive%20-%20Instituto%20Politecnico%20Nacional/JAVA/BlackGym/web/planes.jsp</file>
             <file>file:/C:/Users/Daniel/OneDrive%20-%20Instituto%20Politecnico%20Nacional/JAVA/BlackGym/web/homePage.jsp</file>
             <file>file:/C:/Users/Daniel/OneDrive%20-%20Instituto%20Politecnico%20Nacional/JAVA/BlackGym/web/VerSocios.jsp</file>
+            <file>file:/C:/Users/Daniel/OneDrive%20-%20Instituto%20Politecnico%20Nacional/JAVA/BlackGym/web/Js/crearPlanes.js</file>
             <file>file:/C:/Users/Daniel/OneDrive%20-%20Instituto%20Politecnico%20Nacional/JAVA/BlackGym/src/java/Controller/SociosController.java</file>
+            <file>file:/C:/Users/Daniel/OneDrive%20-%20Instituto%20Politecnico%20Nacional/JAVA/BlackGym/web/modificarPlan.jsp</file>
             <file>file:/C:/Users/Daniel/OneDrive%20-%20Instituto%20Politecnico%20Nacional/JAVA/BlackGym/src/java/Controller/BuscarController.java</file>
             <file>file:/C:/Users/Daniel/OneDrive%20-%20Instituto%20Politecnico%20Nacional/JAVA/BlackGym/src/java/dao/PlanesDao.java</file>
             <file>file:/C:/Users/Daniel/OneDrive%20-%20Instituto%20Politecnico%20Nacional/JAVA/BlackGym/src/java/dao/UsuarioDao.java</file>

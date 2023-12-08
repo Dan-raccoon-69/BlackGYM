@@ -18,6 +18,7 @@ import java.util.List;
  * @author Daniel
  */
 public class PlanesDao {
+
     public static final String url = "jdbc:mysql://localhost:3306/gym";
     public static final String usuario = "root";
     public static final String contraseña = "616263646566676869";
@@ -40,6 +41,45 @@ public class PlanesDao {
             return false;
         }
     }
+
+    public Planes obtenerPlanPorNumero(int numPlan) {
+        try {
+            Connection conn = getConnection();
+            String sql = "SELECT * FROM Planes WHERE NumPlan = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, numPlan);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Planes plan = new Planes(0);
+                plan.setNumPlan(rs.getInt("NumPlan"));
+                plan.setNom(rs.getString("Nom"));
+                plan.setP(rs.getInt("P"));
+                return plan;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null; // Devuelve null si no se encuentra ningún plan con el número dado
+    }
+
+    public boolean actualizarPlan(Planes plan) {
+        String sql = "UPDATE Planes SET Nom=?, P=? WHERE NumPlan=?";
+
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, plan.getNom());
+            ps.setInt(2, plan.getP());
+            ps.setInt(3, plan.getNumPlan());
+
+            int filasActualizadas = ps.executeUpdate();
+
+            return filasActualizadas > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
     // Método para obtener la conexión
     private Connection getConnection() {
         try {
@@ -75,17 +115,17 @@ public class PlanesDao {
             return null;
         }
     }
-    
+
     public List<Planes> buscarPlan(String planAbuscar) {
         try {
             Connection conn = getConnection();
             String sql = "select * from Planes where Nom like ?";
             ps = conn.prepareStatement(sql);
-            ps.setString(1,"%"+planAbuscar+"%");
+            ps.setString(1, "%" + planAbuscar + "%");
             rs = ps.executeQuery();
             List<Planes> planEncontrado = new LinkedList<>();
             Planes plan;
-            while (rs.next()) {     
+            while (rs.next()) {
                 plan = new Planes(rs.getInt("NumPlan"));
                 plan.setNom(rs.getString("Nom"));
                 plan.setP(rs.getInt("P"));

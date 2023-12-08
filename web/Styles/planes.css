@@ -140,11 +140,11 @@ form.navbar-right{
     cursor: pointer;
 }
 
-#crearPlanForm {
+#crearPlanForm{
     margin-top: 20px;
 }
 
-#crearPlanForm form {
+#crearPlanForm form{
     max-width: 300px;
     margin: 0 auto;
     background-color: #1e1e1e;
@@ -152,18 +152,18 @@ form.navbar-right{
     border-radius: 5px;
 }
 
-#crearPlanForm label {
+#crearPlanForm label{
     display: block;
     margin-bottom: 5px;
 }
 
-#crearPlanForm input {
+#crearPlanForm input{
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
 }
 
-#crearPlanLink {
+#crearPlanLink{
     cursor: pointer;
 }
 
