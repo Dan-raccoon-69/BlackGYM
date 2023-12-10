@@ -1,9 +1,14 @@
 package Controller;
 
+import Modelo.Planes;
 import Modelo.Socio;
+import dao.PlanesDao;
 import dao.SociosDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -19,14 +24,14 @@ import javax.servlet.http.HttpSession;
  */
 public class SociosController extends HttpServlet {
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
         RequestDispatcher rd;
-        
+        String mensaje = "";
+
         switch (action) {
             case "inicio":
                 rd = request.getRequestDispatcher("/homePage.jsp");
@@ -35,6 +40,38 @@ public class SociosController extends HttpServlet {
             case "verSocios":
                 this.verTodosLosSocios(request, response);
                 break;
+            case "modificar":
+                // Obtener el número de socio a modificar desde los parámetros de la solicitud
+                int numFol = Integer.parseInt(request.getParameter("fol"));
+
+                // Obtener el plan de la base de datos usando el PlanDao
+                SociosDao sociosDao = new SociosDao();
+                Socio socio = sociosDao.obtenerSocioPorFolio(numFol);
+
+                // Agregar el plan al request para que la vista pueda acceder a él
+                request.setAttribute("socio", socio);
+
+                // En tu servlet
+                PlanesDao planesDao = new PlanesDao();
+                List<Planes> listaPlanes = planesDao.obtenerTodosLosPlanes();
+
+                // Colocar la lista en el alcance de solicitud
+                request.setAttribute("listaPlanes", listaPlanes);
+
+                // Redirigir a la página de modificación
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/modificarSocio.jsp");
+                dispatcher.forward(request, response);
+                break;
+            case "eliminar":
+                if (session.getAttribute("u1") == null) {
+                    mensaje = "Acceso Denegado.";
+                    System.out.println(mensaje);
+                    rd = request.getRequestDispatcher("/index.jsp");
+                    rd.forward(request, response);
+                } else {
+                    this.eliminarSocio(request, response);
+                }
+                break;
             default:
                 throw new AssertionError();
         }
@@ -42,9 +79,110 @@ public class SociosController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {  
+            throws ServletException, IOException {
+        String action = request.getParameter("action");
+
+        if ("insertar".equals(action)) {
+            // Lógica para la inserción de un nuevo plan
+            /*
+            String nombreParametro = request.getParameter("Nom");
+            String precioParametro = request.getParameter("Eda");
+            String TelParametro = request.getParameter("Tel");
+            String CorElecParametro = request.getParameter("CorElec");
+            
+            int precio = Integer.parseInt(precioParametro);
+
+            Socio socioNuevo = new Socio(0);
+            socioNuevo.setNom(nombreParametro);
+            socioNuevo.setP(precio);
+
+            PlanesDao planDao = new PlanesDao();
+            boolean resultado = planDao.insertar(planNuevo);
+
+            String mensaje = "";
+            if (resultado) {
+                mensaje = "El plan fue insertado correctamente.";
+                System.out.println(mensaje);
+            } else {
+                mensaje = "Ocurrió un error, el plan no fue insertado.";
+                System.out.println(mensaje);
+            }
+            verTodosLosPlanes(request, response);
+             */
+
+        } else if ("modificar".equals(action)) {
+
+            int Fol = Integer.parseInt(request.getParameter("fol"));
+            String nombreParametro = request.getParameter("Nom");
+            String edadParametro = request.getParameter("Eda");
+            String TelParametro = request.getParameter("Tel");
+            String CorElecParametro = request.getParameter("CorElec");
+            int numPlanParametro = Integer.parseInt(request.getParameter("NumPlan"));
+
+            // Obtener los parámetros como String desde la solicitud
+            String fechaString = request.getParameter("fecha");
+            String fechaOutString = request.getParameter("fechaOut");
+
+// Convertir los String a objetos Date
+            Date fecha = null;
+            Date fechaOut = null;
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            try {
+                if (fechaString != null && !fechaString.isEmpty()) {
+                    fecha = dateFormat.parse(fechaString);
+                }
+
+                if (fechaOutString != null && !fechaOutString.isEmpty()) {
+                    fechaOut = dateFormat.parse(fechaOutString);
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+                // Manejar la excepción de análisis aquí
+            }
+
+            Socio socioModificado = new Socio(Fol);
+            socioModificado.setNom(nombreParametro);
+            socioModificado.setEda(edadParametro);
+            socioModificado.setTel(TelParametro);
+            socioModificado.setCorElec(CorElecParametro);
+            socioModificado.setNumPlan(numPlanParametro);
+            socioModificado.setInp(fecha);
+            socioModificado.setFip(fechaOut);
+
+            SociosDao socioDao = new SociosDao();
+            boolean resultado = socioDao.actualizarSocio(socioModificado);
+
+            String mensaje = "";
+            if (resultado) {
+                mensaje = "El socio fue modificado correctamente.";
+                System.out.println(mensaje);
+            } else {
+                mensaje = "Ocurrió un error, el socio no fue modificado.";
+                System.out.println(mensaje);
+            }
+            verTodosLosSocios(request, response);
+        }
     }
-    
+
+    private void eliminarSocio(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // se recibe el id del plan que vamos a eliminar
+        int idSocio = Integer.parseInt(request.getParameter("fol"));
+        SociosDao soc = new SociosDao();
+        int respuesta = soc.borrarSocio(idSocio);
+        String mensaje = "";
+        if (respuesta == 1) {
+            mensaje = "El Socio fue eliminado correctamente.";
+            System.out.println(mensaje);
+        } else {
+            mensaje = "El Socio no fue eliminado correctamente.";
+            System.out.println(mensaje);
+        }
+        verTodosLosSocios(request, response);
+    }
+
     protected void verTodosLosSocios(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Socio> todas = new LinkedList<>();

@@ -67,8 +67,8 @@
                             <td>${socio.getInp()}</td>
                             <td>${socio.getFip()}</td>
                             <td class="text-right">
-                                <a class="btn btn-default" href="SociosController?action=modificar&Fol=${socio.getFol()}" role="button">Modificar</a>  
-                                <a class="btn btn-default" href="#" role="button">Eliminar</a>
+                                <a class="btn btn-default" href="SociosController?action=modificar&fol=${socio.getFol()}" role="button">Modificar</a>  
+                                <a class="btn btn-default" href="SociosController?action=eliminar&fol=${socio.getFol()}" role="button">Eliminar</a>
                             </td> 
                         </tr>
                         </c:forEach>>

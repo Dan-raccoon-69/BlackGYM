@@ -76,6 +76,7 @@ CREATE TABLE Planes (
 	insert into planes (NumPlan, Nom, P) values (2,'mes',350);
 	insert into planes (NumPlan, Nom, P) values (3,'trimestre',900);
     
+    update Planes set Nom = 'Trimestre', P = '900' where NumPlan = 3;
     -- Cambia el valor de la columna "Nom" a "NuevoNombre" en el registro con NumPlan igual a 1
 UPDATE Planes SET Nom = 'Trimestre' WHERE NumPlan = 3;
 select * from Planes;
