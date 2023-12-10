@@ -6,6 +6,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this t
     Created on : 2 dic. 2023, 13:33:37
     Author     : Daniel
 */
+body{
+    font-family: 'Roboto', sans-serif;
+}
 
 /* Estilo para la tabla */
 .table {

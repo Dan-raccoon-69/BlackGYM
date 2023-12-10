@@ -141,13 +141,57 @@ public class SociosDao {
             ps.setString(9, socio.getEnt());
             ps.setString(10, socio.getEst());
             ps.setInt(11, socio.getNumPlan());
-            ps.setDate(12, (java.sql.Date) socio.getInp());
-            ps.setDate(13, (java.sql.Date) socio.getFip());
+
+            // Obtén las fechas de tu objeto socioModificado
+            Date fechaInp = socio.getInp();
+            Date fechaFip = socio.getFip();
+
+            // Convierte las fechas a java.sql.Date
+            java.sql.Date sqlFechaInp = new java.sql.Date(fechaInp.getTime());
+            java.sql.Date sqlFechaFip = new java.sql.Date(fechaFip.getTime());
+
+            // Luego, establece las fechas en el PreparedStatement
+            ps.setDate(12, sqlFechaInp);
+            ps.setDate(13, sqlFechaFip);
+
+            //ps.setDate(13, (java.sql.Date) socio.getFip());
             ps.setInt(14, socio.getFol());
-            
+
             int filasActualizadas = ps.executeUpdate();
 
             return filasActualizadas > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean insertar(Socio socio) {
+        String sql = "insert into socios (Nom, Eda, Tel, CorElec, NumPlan, Inp, FiP) values (?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+            Connection conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, socio.getNom());
+            ps.setString(2, socio.getEda());
+            ps.setString(3, socio.getTel());
+            ps.setString(4, socio.getCorElec());
+            ps.setInt(5, socio.getNumPlan());
+            
+            // Obtén las fechas de tu objeto socioModificado
+            Date fechaInp = socio.getInp();
+            Date fechaFip = socio.getFip();
+
+            // Convierte las fechas a java.sql.Date
+            java.sql.Date sqlFechaInp = new java.sql.Date(fechaInp.getTime());
+            java.sql.Date sqlFechaFip = new java.sql.Date(fechaFip.getTime());
+
+            // Luego, establece las fechas en el PreparedStatement
+            ps.setDate(6, sqlFechaInp);
+            ps.setDate(7, sqlFechaFip);
+            
+            ps.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;

@@ -98,7 +98,7 @@
                 <div class="menu-item submenu">
                     <a href="SociosController?action=verSocios"><i class="icono"></i> Socios</a>
                     <div class="submenu-content">
-                        <a href="#"><i class="icono"></i> Agregar</a>
+                        <a href="SociosController?action=agregarSocios"><i class="icono"></i> Agregar</a>
                         <a href="SociosController?action=verSocios"><i class="icono"></i> Ver Socios</a>
                     </div>
                 </div>

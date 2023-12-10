@@ -31,7 +31,9 @@ public class SociosController extends HttpServlet {
         HttpSession session = request.getSession();
         RequestDispatcher rd;
         String mensaje = "";
-
+        PlanesDao planesDao = new PlanesDao();
+        List<Planes> listaPlanes = planesDao.obtenerTodosLosPlanes();
+        RequestDispatcher dispatcher;
         switch (action) {
             case "inicio":
                 rd = request.getRequestDispatcher("/homePage.jsp");
@@ -39,6 +41,17 @@ public class SociosController extends HttpServlet {
                 break;
             case "verSocios":
                 this.verTodosLosSocios(request, response);
+                break;
+            case "agregarSocios":
+                planesDao = new PlanesDao();
+                listaPlanes = planesDao.obtenerTodosLosPlanes();
+
+                // Colocar la lista en el alcance de solicitud
+                request.setAttribute("listaPlanes", listaPlanes);
+
+                // Redirigir a la página de modificación
+                dispatcher = request.getRequestDispatcher("/agregarSocios.jsp");
+                dispatcher.forward(request, response);
                 break;
             case "modificar":
                 // Obtener el número de socio a modificar desde los parámetros de la solicitud
@@ -51,15 +64,14 @@ public class SociosController extends HttpServlet {
                 // Agregar el plan al request para que la vista pueda acceder a él
                 request.setAttribute("socio", socio);
 
-                // En tu servlet
-                PlanesDao planesDao = new PlanesDao();
-                List<Planes> listaPlanes = planesDao.obtenerTodosLosPlanes();
+                planesDao = new PlanesDao();
+                listaPlanes = planesDao.obtenerTodosLosPlanes();
 
                 // Colocar la lista en el alcance de solicitud
                 request.setAttribute("listaPlanes", listaPlanes);
 
                 // Redirigir a la página de modificación
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/modificarSocio.jsp");
+                dispatcher = request.getRequestDispatcher("/modificarSocio.jsp");
                 dispatcher.forward(request, response);
                 break;
             case "eliminar":
@@ -83,32 +95,57 @@ public class SociosController extends HttpServlet {
         String action = request.getParameter("action");
 
         if ("insertar".equals(action)) {
-            // Lógica para la inserción de un nuevo plan
-            /*
+            
             String nombreParametro = request.getParameter("Nom");
-            String precioParametro = request.getParameter("Eda");
+            String edadParametro = request.getParameter("Eda");
             String TelParametro = request.getParameter("Tel");
             String CorElecParametro = request.getParameter("CorElec");
+            int numPlanParametro = Integer.parseInt(request.getParameter("NumPlan"));
             
-            int precio = Integer.parseInt(precioParametro);
+            // Obtener los parámetros como String desde la solicitud
+            String fechaString = request.getParameter("fecha");
+            String fechaOutString = request.getParameter("fechaOut");
 
+            // Convertir los String a objetos Date
+            Date fecha = null;
+            Date fechaOut = null;
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            try {
+                if (fechaString != null && !fechaString.isEmpty()) {
+                    fecha = dateFormat.parse(fechaString);
+                }
+
+                if (fechaOutString != null && !fechaOutString.isEmpty()) {
+                    fechaOut = dateFormat.parse(fechaOutString);
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+                // Manejar la excepción de análisis aquí
+            }
+            
             Socio socioNuevo = new Socio(0);
             socioNuevo.setNom(nombreParametro);
-            socioNuevo.setP(precio);
+            socioNuevo.setEda(edadParametro);
+            socioNuevo.setTel(TelParametro);
+            socioNuevo.setCorElec(CorElecParametro);
+            socioNuevo.setNumPlan(numPlanParametro);
+            socioNuevo.setFip(fechaOut);
+            socioNuevo.setInp(fecha);
 
-            PlanesDao planDao = new PlanesDao();
-            boolean resultado = planDao.insertar(planNuevo);
+            SociosDao socioDao = new SociosDao();
+            boolean resultado = socioDao.insertar(socioNuevo);
 
             String mensaje = "";
             if (resultado) {
-                mensaje = "El plan fue insertado correctamente.";
+                mensaje = "El usuario fue insertado correctamente.";
                 System.out.println(mensaje);
             } else {
-                mensaje = "Ocurrió un error, el plan no fue insertado.";
+                mensaje = "Ocurrió un error, el usuario no fue agregado.";
                 System.out.println(mensaje);
             }
-            verTodosLosPlanes(request, response);
-             */
+            verTodosLosSocios(request, response);
 
         } else if ("modificar".equals(action)) {
 
@@ -118,12 +155,18 @@ public class SociosController extends HttpServlet {
             String TelParametro = request.getParameter("Tel");
             String CorElecParametro = request.getParameter("CorElec");
             int numPlanParametro = Integer.parseInt(request.getParameter("NumPlan"));
-
+            //int NumParametro = Integer.parseInt(request.getParameter("Num"));
+            String CalParametro = request.getParameter("Cal");
+            String ColParametro = request.getParameter("Col");
+            String CpParametro = request.getParameter("Cp");
+            String EntParametro = request.getParameter("Ent");
+            String EstParametro = request.getParameter("Est");
+            
             // Obtener los parámetros como String desde la solicitud
             String fechaString = request.getParameter("fecha");
             String fechaOutString = request.getParameter("fechaOut");
 
-// Convertir los String a objetos Date
+            // Convertir los String a objetos Date
             Date fecha = null;
             Date fechaOut = null;
 
@@ -148,8 +191,13 @@ public class SociosController extends HttpServlet {
             socioModificado.setTel(TelParametro);
             socioModificado.setCorElec(CorElecParametro);
             socioModificado.setNumPlan(numPlanParametro);
-            socioModificado.setInp(fecha);
+            socioModificado.setCol(ColParametro);
+            socioModificado.setCp(CpParametro);
+            socioModificado.setCal(CalParametro);
+            socioModificado.setEnt(EntParametro);
+            socioModificado.setEst(EstParametro);
             socioModificado.setFip(fechaOut);
+            socioModificado.setInp(fecha);
 
             SociosDao socioDao = new SociosDao();
             boolean resultado = socioDao.actualizarSocio(socioModificado);

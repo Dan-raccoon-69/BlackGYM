@@ -18,6 +18,7 @@ CREATE TABLE socios (
     FiP DATE,
     FOREIGN KEY (NumPlan) REFERENCES Planes(NumPlan)
 );
+update socios set Inp = '2023-12-10', FiP = '2024-01-10' where NumPlan = 6;
 select * from socios;
 select * from socios order by fol asc;
 drop table socios;
@@ -39,6 +40,7 @@ VALUES ('Carlos Chagolla Hernandez', '33', 5517182032, 'CCHO32@outloo.com', 'San
 INSERT INTO socios (Nom, Eda, Tel, CorElec, Cal, Num, Col, Cp, Ent, Est, NumPlan, Inp, FiP)
 VALUES ('Daniel Gustavo De La Cruz Bautista', '21', 5512453095, 'gustavodlc21@gmail.com', 'Ramon', 7, 'Texalpa', '55123', 'Mexico', 'Mexico', 1, '2023-11-12', '2024-11-12');
 select * from socios;
+delete from socios where fol = 6;
 use gym;
 select * from Planes where Nom like "%" 'anu' "%";
 CREATE TABLE login (
@@ -79,6 +81,8 @@ CREATE TABLE Planes (
     update Planes set Nom = 'Trimestre', P = '900' where NumPlan = 3;
     -- Cambia el valor de la columna "Nom" a "NuevoNombre" en el registro con NumPlan igual a 1
 UPDATE Planes SET Nom = 'Trimestre' WHERE NumPlan = 3;
+delete from Planes where NumPlan = 5;
+
 select * from Planes;
 use gym;
 select * from Planes where Nom like 'anualidad';

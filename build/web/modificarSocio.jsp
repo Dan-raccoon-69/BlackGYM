@@ -11,13 +11,72 @@
     <head>
         <meta charset="utf-8">    
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" href="favicon.ico">
         <title>Modificar Socio</title>
         <link rel="stylesheet" href="Styles/admin.css"/>
         <link rel="stylesheet" href="Styles/modificarSocios.css"/>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" /> 
+
+        <!-- Agrega esto en la sección head de tu HTML -->
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                // Manejar el cambio en el select de planes
+                $('select[name="NumPlan"]').change(function () {
+                    actualizarFechaTermino();
+                });
+
+                // Manejar el cambio en el input de fecha inicial
+                $('input[name="fecha"]').change(function () {
+                    actualizarFechaTermino();
+                });
+
+                // Función para actualizar la fecha de término
+                function actualizarFechaTermino() {
+                    var fechaInicial = $('input[name="fecha"]').val();
+                    var numPlanSeleccionado = $('select[name="NumPlan"]').val();
+                    console.log("fechaInicial ",fechaInicial);
+                    console.log(numPlanSeleccionado);
+                    // Lógica para calcular la fecha de término basada en el tipo de plan
+                    let fechaTermino;
+
+                    switch (numPlanSeleccionado) {
+                        case '1':
+                            fechaTermino = new Date(fechaInicial);
+                            fechaTermino.setFullYear(fechaTermino.getFullYear() + 1);
+                            break;
+
+                        case '2':
+                        case '5':
+                            fechaTermino = new Date(fechaInicial);
+                            fechaTermino.setMonth(fechaTermino.getMonth() + 1);
+                            break;
+
+                        case '3':
+                            fechaTermino = new Date(fechaInicial);
+                            fechaTermino.setMonth(fechaTermino.getMonth() + 3);
+                            break;
+
+                        default:
+                            // Si el tipo de plan no se reconoce, no hacemos nada
+                            console.log("No se encontro");
+                            return;
+                    }
+
+                    console.log("FechaTermino: ", fechaTermino);
+                    // Formatea la fecha de término como "dd/mm/yyyy"
+                    var fechaTerminoFormateada = fechaTermino.getDate().toString().padStart(2, '0') + '/' + (fechaTermino.getMonth() + 1).toString().padStart(2, '0') + '/' + fechaTermino.getFullYear();
+                    // Actualiza el valor del input de fecha de término (oculto) en formato estándar "yyyy-mm-dd"
+                    var fechaTerminoEstandar = fechaTermino.toISOString().split('T')[0];
+                    $('#fechaOut').val(fechaTerminoEstandar);
+                }
+
+                // Llama a la función al inicio para manejar la fecha inicial por defecto
+                actualizarFechaTermino();
+            });
+
+        </script>
     </head>
     <body>
         <div class="masthead">
@@ -47,7 +106,7 @@
 
                     <label for="CorElec" class="my-form-label">Email:</label>
                     <input type="text" autocomplete="off" name="CorElec" class="my-form-input" value="${socio.corElec}" required>
-
+                    
                     <label for="NumPlan" class="my-form-label">Seleccionar Plan:</label>
                     <select name="NumPlan" class="my-form-input" required>
                         <c:forEach var="plan" items="${listaPlanes}">
@@ -66,7 +125,7 @@
                     <input type="date" class="my-form-input" value="${socio.inp}" id="fecha" name="fecha" required>
 
                     <label for="fechaOut" class="my-form-label">Fecha de Termino:</label>
-                    <input type="date" class="my-form-input" id="fechaOut" value="${socio.fip}" name="fechaOut" readonly>
+                    <input type="date" class="my-form-input" id="fechaOut" name="fechaOut" readonly >
 
 
                     <button type="submit" class="my-form-button" name="action" value="modificar">Modificar Socio</button>
@@ -77,7 +136,6 @@
         <footer class="footer">
             <p>&copy; 2023 BlackGym, The Godfathers.</p>
         </footer>
-                    
-        <script src="Js/fecha.js"></script>
+
     </body>
 </html>
