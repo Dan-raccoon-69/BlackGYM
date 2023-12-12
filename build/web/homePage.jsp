@@ -128,7 +128,8 @@
                             <div class="panel-heading">
                                 <h3><b>Folio: ${param.fol} </b> </h3>
                                 <h3><b>Inicio: ${param.inp} </b> </h3>
-                                <h3><b>Vence: ${param.fip} </b> </h3>                                                           
+                                <h3><b>Vence: ${param.fip} </b> </h3>  
+                                <a class="enlace" href="SociosController?action=modificar&fol=${param.fol}" role="button">Modificar Plan</a> 
                             </div>
                         </div> 
                     </div>
