@@ -89,23 +89,24 @@ select * from Planes where Nom like 'anualidad';
 /************************************************************************************************ */
     CREATE TABLE Ventas (
     FolV INT AUTO_INCREMENT PRIMARY KEY,
-    CanP varchar(2),
+    CanP int,
     DesV varchar(50),
-    CosV varchar(50),
+    CosV double,
     FecV date,
     Hor time,
     ForP varchar (50)
     );
-    
-    
+    use gym;
+    drop table Ventas;
  insert into ventas (CanP, Desv, CosV,FecV, Hor, ForP) 
- values(1,'agua','15','2023-11-29','14:22:00','Efectivo');	
+ values(1,'Botella Agua', 20,'2023-11-29','14:22:00','Efectivo');	
  insert into ventas (CanP, Desv, CosV,FecV, Hor, ForP) 
- values(2,'toma de oxido nitraflex','20','2023-11-29','19:11:55','Efectivo');	
+ values(2,'Botella de agua, 1 sobre de preenteno',20,'2023-11-29','19:11:55','Efectivo');	
  insert into ventas (CanP, Desv, CosV,FecV, Hor, ForP) 
- values(1,'proteina whey','1200','2023-11-30','20:22:00','tarjeta');	
+ values(1,'Proteina whey',1200,'2023-11-30','20:22:00','Efectivo');	
  insert into ventas (CanP, Desv, CosV,FecV, Hor, ForP) 
- values(3,'toma de creatina, agua y oxido','50','2023-11-29','14:22:00','Efectivo');	
+ values(2,'1 Creatina, 1 sobre de preentreno', 580,'2023-11-29','14:22:00','Efectivo');	
+ select * from Ventas;
  
  CREATE TABLE Productos (
     NumProd INT AUTO_INCREMENT PRIMARY KEY,
@@ -114,6 +115,11 @@ select * from Planes where Nom like 'anualidad';
     Exi int,
     CosProdu int
     );
+    select * from Productos;
+    select * from ventas;
+    drop table Productos;
+    
+    INSERT INTO ventas (CanP, DesV, CosV, FecV, Hor, ForP) VALUES (1, 'creatina', '50', '2023-11-29', '14:22:00', 'Efectivo');
     
     insert into productos(NomProd,DesProd,Exi,CosProdu)
     values ('proteina','iso','4','1200');
@@ -122,10 +128,23 @@ select * from Planes where Nom like 'anualidad';
     insert into productos(NomProd,DesProd,Exi,CosProdu)
     values ('agua','pa tomar','50','15');
     insert into productos(NomProd,DesProd,Exi,CosProdu)
-    values ('creatina','monohidratada UN','3','500');
+    values ('creatina','monohidratada UN',3,'500');
     insert into productos(NomProd,DesProd,Exi,CosProdu)
     values ('Quemador','quemador BlackSpider','1','450');
     
+DELIMITER //
+
+CREATE TRIGGER despues_de_insertar_venta
+AFTER INSERT ON Ventas
+FOR EACH ROW
+BEGIN
+    -- Desincrementar las existencias
+    UPDATE Productos
+    SET Exi = Exi - NEW.CanP
+    WHERE NomProd = NEW.DesV;
+END;
+
+// DELIMITER ;
 CREATE TABLE VentasPlanes (
     Num_Plan int,   
     Nom VARCHAR(50),

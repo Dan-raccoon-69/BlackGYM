@@ -33,6 +33,10 @@
         <servlet-name>AutocompleteController</servlet-name>
         <servlet-class>Controller.AutocompleteController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VentasController</servlet-name>
+        <servlet-class>Controller.VentasController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -60,6 +64,10 @@
     <servlet-mapping>
         <servlet-name>AutocompleteController</servlet-name>
         <url-pattern>/AutocompleteController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VentasController</servlet-name>
+        <url-pattern>/VentasController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
