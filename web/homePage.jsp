@@ -166,7 +166,7 @@
                 <div class="menu-item"><a href="VentasController?action=agregarVentas"><i class="icono"></i> A. Ventas</a></div>
                 <div class="menu-item"><a href="VentasController?action=verReporte"><i class="icono"></i> Reportes</a></div>
                 <div class="menu-item"><a href="LoginController?action=irAdministracion"><i class="icono"></i> Administrador</a></div>
-                <div class="menu-item"><a href="#"><i class="icono"></i> Productos</a></div>
+                <div class="menu-item"><a href="ProductosController?action=verProductos"><i class="icono"></i> Productos</a></div>
             </aside>
 
             <!-- Contenedor adicional -->

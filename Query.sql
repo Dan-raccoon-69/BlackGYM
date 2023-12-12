@@ -108,29 +108,31 @@ select * from Planes where Nom like 'anualidad';
  values(2,'1 Creatina, 1 sobre de preentreno', 580,'2023-11-29','14:22:00','Efectivo');	
  select * from Ventas;
  delete from Ventas where FolV = 9;
+ 
  CREATE TABLE Productos (
     NumProd INT AUTO_INCREMENT PRIMARY KEY,
     NomProd varchar(50),
     DesProd varchar(50),
     Exi int,
-    CosProdu int
+    CosProdu double 
     );
+    use gym;
     select * from Productos;
     select * from ventas;
     drop table Productos;
-    
+    select * from Productos order by NumProd asc;
     INSERT INTO ventas (CanP, DesV, CosV, FecV, Hor, ForP) VALUES (1, 'creatina', '50', '2023-11-29', '14:22:00', 'Efectivo');
     
     insert into productos(NomProd,DesProd,Exi,CosProdu)
-    values ('proteina','iso','4','1200');
+    values ('Proteina whey','iso',4,1200);
     insert into productos(NomProd,DesProd,Exi,CosProdu)
-    values ('oxido','oxido v8 ','3','600');
+    values ('Oxido','oxido v8',3,600);
     insert into productos(NomProd,DesProd,Exi,CosProdu)
-    values ('agua','pa tomar','50','15');
+    values ('Botella Agua','1.5L',50,15);
     insert into productos(NomProd,DesProd,Exi,CosProdu)
-    values ('creatina','monohidratada UN',3,'500');
+    values ('Creatina Birdman','monohidratada UN',3,500);
     insert into productos(NomProd,DesProd,Exi,CosProdu)
-    values ('Quemador','quemador BlackSpider','1','450');
+    values ('Quemador','quemador BlackSpider',3,450);
     
 DELIMITER //
 
