@@ -107,7 +107,7 @@ select * from Planes where Nom like 'anualidad';
  insert into ventas (CanP, Desv, CosV,FecV, Hor, ForP) 
  values(2,'1 Creatina, 1 sobre de preentreno', 580,'2023-11-29','14:22:00','Efectivo');	
  select * from Ventas;
- 
+ delete from Ventas where FolV = 9;
  CREATE TABLE Productos (
     NumProd INT AUTO_INCREMENT PRIMARY KEY,
     NomProd varchar(50),

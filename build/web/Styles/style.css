@@ -7,16 +7,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this t
     Author     : Daniel
 */
 
-:root{
-    --fuenteHeading: 'PT Sans', sans-serif;
-    --fuenteParrafos: 'Open Sans', sans-serif;
-
-    --primario: #444;
-    --blanco: #ffffff;
-    --negro: #000000;
-    --claro: #e1e1e1;
-
-}
 
 html {
     box-sizing: border-box;
@@ -45,6 +35,11 @@ h2 {
     text-align: center;
 }
 
+h3 {
+    font-size: 2.3rem;
+    text-align: center;
+}
+
 p {
     font-size: 2rem;
 }
@@ -57,14 +52,22 @@ aside{
     max-width: 100%;
 }
 
-
 .contenedor {
-    max-width: 85%;
+    max-width: 100%;
     margin: 0rem auto;
     display: flex;
+    flex-direction: column;
     gap: 3rem;
-    
+}
 
+aside .contenedorAside{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contenedorAside .contenedorDatos{
+    display: flex;
 }
 
 .tabla{
@@ -82,13 +85,34 @@ aside{
     text-transform: uppercase;
 }
 
+.panel{
+    width: 100%;
+}
+
+.panel .contenedorDatos{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.panel .contenedorDatos .Tarjeta, .Total, .Efectivo{
+    display: flex;
+    flex-direction: row;
+}
+
+.my-form-input{
+    background-color: #4a4a4a !important;
+}
+
 .filtros{
     display: flex;
-    margin: 1rem auto;
+    margin: auto;
     text-transform: uppercase;
     text-align: center;
     gap: 5rem;
     padding: 1rem;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 
@@ -96,14 +120,14 @@ aside{
 
 @media (max-width: 768px){
     .con-sidebar{
-       display: grid;
-       gap: 3rem;
+        display: grid;
+        gap: 3rem;
     }
     aside{
-       flex: 1;
+        flex: 1;
     }
     article{
-       flex: 3;
+        flex: 3;
     }
 
 }
