@@ -8,16 +8,32 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
         <title>BlackGYM</title>
+        <!-- Asegï¿½rate de que Chart.js se estï¿½ cargando correctamente -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <!-- Agrega la referencia a jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-        <!-- Agrega el script JavaScript para el autocompletado -->
         <script>
+            // Funciï¿½n para convertir el formato de fecha a milisegundos
+            function convertirFechaAMilisegundos(fechaString) {
+                var meses = {
+                    "ene.": 0, "feb.": 1, "mar.": 2, "abr.": 3, "may.": 4, "jun.": 5,
+                    "jul.": 6, "ago.": 7, "sep.": 8, "oct.": 9, "nov.": 10, "dic.": 11
+                };
+
+                var partesFecha = fechaString.split(" ");
+                var mes = meses[partesFecha[0].toLowerCase()];
+                var dia = parseInt(partesFecha[1].replace(",", ""));
+                var anio = parseInt(partesFecha[2]);
+
+                return new Date(anio, mes, dia).getTime();
+            }
+
             $(document).ready(function () {
-                // Captura el evento de escribir en el campo de búsqueda
+                // Captura el evento de escribir en el campo de bï¿½squeda
                 $("#searchInput").on("input", function () {
-                    // Obtén el valor del campo de búsqueda
+                    // Obtï¿½n el valor del campo de bï¿½squeda
                     var query = $(this).val();
 
                     // Realiza una solicitud AJAX al servidor para obtener sugerencias
@@ -45,7 +61,7 @@
                 $("#suggestionList").on("click", "a", function (event) {
                     event.preventDefault();
 
-                    // Obtén los datos del enlace clicado
+                    // Obtï¿½n los datos del enlace clicado
                     var selectedSocio = {
                         fol: $(this).data("fol"),
                         Nom: $(this).data("nom"),
@@ -53,15 +69,60 @@
                         Fip: $(this).data("fip")
                     };
 
-                    // Realiza alguna acción con los datos del socio
-                    console.log("Datos del socio seleccionado:", selectedSocio);
-
-                    // Redirecciona a la página deseada con los parámetros del socio
+                    // Redirecciona a la pï¿½gina deseada con los parï¿½metros del socio
                     window.location.href = "homePage.jsp?nombre=" + encodeURIComponent(selectedSocio.Nom) + "&inp=" + selectedSocio.Inp + "&fip=" + selectedSocio.Fip + "&fol=" + selectedSocio.fol;
-                    console.log("Datos del socio seleccionado:", selectedSocio);
                 });
-            });
 
+                // Obtiene el elemento canvas despuï¿½s de la redirecciï¿½n
+                var canvas = document.getElementById('progressChart');
+
+                if (canvas) {
+                    // Obtiene el contexto 2D del canvas
+                    var ctx = canvas.getContext('2d');
+
+                    if (!ctx) {
+                        console.error("No se pudo obtener el contexto 2D del elemento canvas.");
+                    } else {
+                        // Configuraciï¿½n del grï¿½fico
+                        var startDate = convertirFechaAMilisegundos("${param.inp}");
+                        var endDate = convertirFechaAMilisegundos("${param.fip}");
+                        var currentDate = new Date().getTime();
+                        var progress = ((currentDate - startDate) / (endDate - startDate)) * 100;
+
+                        console.log('Fecha de inicio:', new Date(startDate));
+                        console.log('Fecha de finalizaciï¿½n:', new Date(endDate));
+                        console.log('Fecha actual:', new Date(currentDate));
+                        console.log('Progreso:', progress);
+
+                        // Actualiza el porcentaje en la interfaz grï¿½fica
+                        $("#progressPercentage").text(progress.toFixed(3) + "%");
+
+                        // Configuraciï¿½n del grï¿½fico
+                        var config = {
+                            type: 'doughnut',
+                            data: {
+                                labels: ['Progreso', 'Restante'],
+                                datasets: [{
+                                        data: [progress, 100 - progress],
+                                        backgroundColor: ['#14213d', '#e7b057'],
+                                        //backgroundColor: ['#1a1110', '#353839'],
+                                    }]
+                            },
+                            options: {
+                                responsive: true,
+                                legend: {
+                                    display: false
+                                },
+                            }
+                        };
+
+                        // Crea el grï¿½fico
+                        new Chart(ctx, config);
+                    }
+                } else {
+                    console.error("No se encontrï¿½ el elemento canvas con ID 'progressChart'.");
+                }
+            });
         </script>
 
     </head>
@@ -111,7 +172,7 @@
             <!-- Contenedor adicional -->
             <div class="additional-container">
                 <div class="rectangle">
-                    <p>BIENVENIDO!!!</p>
+                    <p style="font-family: 'Times New Roman', Times, serif; font-weight: bolder;">BIENVENIDO</p>
                 </div>
                 <div class="cuadrados_container">
 
@@ -137,12 +198,12 @@
                     <div class="square">
                         <div class="aquare-info">
                             <div class="panel-heading">
-                                <figure>
-                                    <img src="img/tiempo.jpg" alt="Foto del limite" class="tiempo">
-                                </figure>
+                                <div class="panel-heading">
+                                    <h2><b>Porcentaje del avance del plan: <p style="display: inline" id="progressPercentage">0%</p>  </b> </h2>
+                                    <canvas id="progressChart"></canvas>
+                                </div>
                             </div>
                             <div class="panel-heading">
-                                <h3><b>Porcentaje del avance del plan</b> </h3>
                             </div>
                         </div> 
                     </div>
