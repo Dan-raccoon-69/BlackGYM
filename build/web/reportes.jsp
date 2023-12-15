@@ -43,17 +43,17 @@
                     <div class="contenedorDatos">
                         <div class="Efectivo">
                             <p>Efectivo: </p>
-                            <p><b> $ Efectivo</b></p>
+                            <p><b> $ ${costosEfe} </b></p>
                         </div>
 
                         <div class="Tarjeta">
                             <p>Tarjeta: </p>
-                            <p><b> $ Efectivo</b></p>
+                            <p><b>  $ ${costosTar} </b></p>
                         </div>
 
                         <div class="Total">
                             <p>Total: </p>
-                            <p><b> $ Efectivo</b></p>
+                            <p><b>  $ ${costosTot} </b></p>
                         </div>
                     </div>
                 </div>

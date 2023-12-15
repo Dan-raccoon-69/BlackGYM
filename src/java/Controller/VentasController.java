@@ -167,13 +167,25 @@ public class VentasController extends HttpServlet {
         List<Ventas> todas = new LinkedList<>();
         VentasDao venta = new VentasDao();
         todas = venta.obtenerTodasLasVentas();
-        System.out.println("VENTAS DESDE CONTROLLER");
+        Double costosEfe = 0.0;
+        Double costosTar = 0.0;
+        Double costosTot = 0.0;
         for (Ventas toda : todas) {
+            if(toda.getForP().equals("Efectivo")){
+               costosEfe += toda.getCosV(); 
+            }
+            else if(toda.getForP().equals("Tarjeta")){
+                costosTar +=toda.getCosV();
+            }
             System.out.println(toda.toString());
         }
+        costosTot = costosEfe + costosTar;
         RequestDispatcher rd;
         // compartimos la variable ultimas, para poder acceder la vista con Expression Language
         request.setAttribute("todas", todas);
+        request.setAttribute("costosEfe", costosEfe);
+        request.setAttribute("costosTar", costosTar);
+        request.setAttribute("costosTot", costosTot);
         // enviamos respuesta, se renderiza a la vista "index.jsp"
         rd = request.getRequestDispatcher("/reportes.jsp");
         rd.forward(request, response);
