@@ -68,10 +68,14 @@
 
                         <div class="panel-body">
 
-                            <div class="filtros">
-                                Inicio: <input class="my-form-input" id="Date_search" type="date" placeholder="Search by Date">        
-                                Final: <input class="my-form-input" id="Date_search" type="date" placeholder="Search by Date"/>       
-                            </div>
+                            <form class="filtros" method="post" action="VentasController">
+                                Inicio: <input class="my-form-input" id="Date_search" name="fechaIni" type="date" value="${fechaI}" required placeholder="Search by Date">        
+                                Final: <input class="my-form-input" id="Date_search" name="fechaFin" type="date" value="${fechaF}" required placeholder="Search by Date"/>   
+                                <!--  
+                                <div><a href="VentasController?action=fechas" style="border-radius: 10px"><i class="icono"></i> Ver </a></div>
+                                -->
+                                <button type="submit" class="my-form-button" name="action" value="Ver">Ver</button>
+                            </form>
 
                             <table class="table table-striped">
                                 <thead>

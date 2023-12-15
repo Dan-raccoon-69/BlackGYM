@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.LinkedList;
@@ -33,6 +34,7 @@ public class VentasController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
+        String action2 = request.getParameter("action");
         HttpSession session = request.getSession();
         RequestDispatcher rd;
         String mensaje = "";
@@ -48,6 +50,13 @@ public class VentasController extends HttpServlet {
                 rd = request.getRequestDispatcher("/reportes.jsp");
                 rd.forward(request, response);
                 break;
+            case "fechas":
+                verTodasLasVentas(request, response);
+                // Redirigir a la página de agregar
+                rd = request.getRequestDispatcher("/reportes.jsp");
+                rd.forward(request, response);
+                break;
+
             default:
                 throw new AssertionError();
         }
@@ -93,77 +102,56 @@ public class VentasController extends HttpServlet {
                 System.out.println(mensaje);
             }
             verTodasLasVentas(request, response);
+        } else if ("Ver".equals(action)) {
+            RequestDispatcher rd;
+            String fechaIni = request.getParameter("fechaIni");
+            String fechaFin = request.getParameter("fechaFin");
+
+            LocalDate fechaI = LocalDate.parse(fechaIni);
+            LocalDate fechaF = LocalDate.parse(fechaFin);
+
+            List<Ventas> ventasTotales = new LinkedList<>();
+            List<Ventas> ventasFiltradas = new LinkedList<>();
+            VentasDao venta = new VentasDao();
+            ventasTotales = venta.obtenerTodasLasVentas();
+            Double costosEfe = 0.0;
+            Double costosTar = 0.0;
+            Double costosTot = 0.0;
+            for (Ventas ventas : ventasTotales) {
+                // Asegúrate de que toda.getFecV() devuelve un java.sql.Date
+                java.sql.Date fechaVenta = (java.sql.Date) ventas.getFecV();
+                // Convertir la fecha de la venta a LocalDate
+                LocalDate fechaVentaLocalDate = fechaVenta.toLocalDate();
+
+                if (fechaVentaLocalDate.isAfter(fechaI) && fechaVentaLocalDate.isBefore(fechaF)) {
+                    ventasFiltradas.add(ventas);
+                    if (ventas.getForP().equals("Efectivo")) {
+                        costosEfe += ventas.getCosV();
+                    } else if (ventas.getForP().equals("Tarjeta")) {
+                        costosTar += ventas.getCosV();
+                    }
+                }
+            }
+
+            costosTot = costosEfe + costosTar;
+            
+            // compartimos la variable ultimas, para poder acceder la vista con Expression Language
+            request.setAttribute("todas", ventasFiltradas);
+            request.setAttribute("costosEfe", costosEfe);
+            request.setAttribute("costosTar", costosTar);
+            request.setAttribute("costosTot", costosTot);
+            request.setAttribute("fechaI", fechaI);
+            request.setAttribute("fechaF", fechaF);
+            // enviamos respuesta, se renderiza a la vista "index.jsp"
+            rd = request.getRequestDispatcher("/reportes.jsp");
+            rd.forward(request, response);
         }
-        /*
-        else if ("modificar".equals(action)) {
 
-            int Fol = Integer.parseInt(request.getParameter("fol"));
-            String nombreParametro = request.getParameter("Nom");
-            String edadParametro = request.getParameter("Eda");
-            String TelParametro = request.getParameter("Tel");
-            String CorElecParametro = request.getParameter("CorElec");
-            int numPlanParametro = Integer.parseInt(request.getParameter("NumPlan"));
-            //int NumParametro = Integer.parseInt(request.getParameter("Num"));
-            String CalParametro = request.getParameter("Cal");
-            String ColParametro = request.getParameter("Col");
-            String CpParametro = request.getParameter("Cp");
-            String EntParametro = request.getParameter("Ent");
-            String EstParametro = request.getParameter("Est");
-
-            // Obtener los parámetros como String desde la solicitud
-            String fechaString = request.getParameter("fecha");
-            String fechaOutString = request.getParameter("fechaOut");
-
-            // Convertir los String a objetos Date
-            Date fecha = null;
-            Date fechaOut = null;
-
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-            try {
-                if (fechaString != null && !fechaString.isEmpty()) {
-                    fecha = dateFormat.parse(fechaString);
-                }
-
-                if (fechaOutString != null && !fechaOutString.isEmpty()) {
-                    fechaOut = dateFormat.parse(fechaOutString);
-                }
-            } catch (ParseException e) {
-                e.printStackTrace();
-                // Manejar la excepción de análisis aquí
-            }
-
-            Socio socioModificado = new Socio(Fol);
-            socioModificado.setNom(nombreParametro);
-            socioModificado.setEda(edadParametro);
-            socioModificado.setTel(TelParametro);
-            socioModificado.setCorElec(CorElecParametro);
-            socioModificado.setNumPlan(numPlanParametro);
-            socioModificado.setCol(ColParametro);
-            socioModificado.setCp(CpParametro);
-            socioModificado.setCal(CalParametro);
-            socioModificado.setEnt(EntParametro);
-            socioModificado.setEst(EstParametro);
-            socioModificado.setFip(fechaOut);
-            socioModificado.setInp(fecha);
-
-            SociosDao socioDao = new SociosDao();
-            boolean resultado = socioDao.actualizarSocio(socioModificado);
-
-            String mensaje = "";
-            if (resultado) {
-                mensaje = "El socio fue modificado correctamente.";
-                System.out.println(mensaje);
-            } else {
-                mensaje = "Ocurrió un error, el socio no fue modificado.";
-                System.out.println(mensaje);
-            }
-            verTodosLosSocios(request, response);
-         */
     }
-    
+
     protected void verTodasLasVentas(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         List<Ventas> todas = new LinkedList<>();
         VentasDao venta = new VentasDao();
         todas = venta.obtenerTodasLasVentas();
@@ -171,13 +159,11 @@ public class VentasController extends HttpServlet {
         Double costosTar = 0.0;
         Double costosTot = 0.0;
         for (Ventas toda : todas) {
-            if(toda.getForP().equals("Efectivo")){
-               costosEfe += toda.getCosV(); 
+            if (toda.getForP().equals("Efectivo")) {
+                costosEfe += toda.getCosV();
+            } else if (toda.getForP().equals("Tarjeta")) {
+                costosTar += toda.getCosV();
             }
-            else if(toda.getForP().equals("Tarjeta")){
-                costosTar +=toda.getCosV();
-            }
-            System.out.println(toda.toString());
         }
         costosTot = costosEfe + costosTar;
         RequestDispatcher rd;
